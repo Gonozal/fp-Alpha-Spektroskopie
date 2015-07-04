@@ -1,0 +1,436 @@
+% Klassifiziert den Dokumenten-Typ
+% Doku: http://exp1.fkp.physik.tu-darmstadt.de/tuddesign/
+% Farben: http://www.tu-darmstadt.de/media/medien_stabsstelle_km/services/medien_cd/das_bild_der_tu_darmstadt.pdf
+%  bigchapter: Chapter haben doppelte Schriftgröße
+%  linedtoc: Linien im Inhaltsverzeichnis wie bei Überschriften
+%  colorbacktitle: Der Dokumenten-Titel wird mir der Accentfarbe hinterlegt
+\documentclass[bigchapter,colorback,accentcolor=tud4b,linedtoc,11pt]{tudreport}
+
+% Input Dokument hat das Encoding UTF-8
+\usepackage[utf8]{inputenc}
+% Wichtiges Paket für Links und verlinktes Inhaltsverzeichnis
+\usepackage{hhline}
+\usepackage[ngerman]{hyperref}
+% Paket für Fußnoten
+\usepackage[stable]{footmisc}
+% Paket für amsmath (aligned mathe formeln)
+\usepackage{amsmath}
+% Paket für Bibliotheks-Verzeichnis, square: Verwende eckige statt runde klammern
+% \usepackage[square]{natbib}
+% Paket zum Plotten von Datensätzen
+\usepackage{pgfplots}
+\usepgfplotslibrary{patchplots}
+
+
+\pgfkeys{%
+  /pgfplots/default/.style={%
+    /pgf/number format/use comma,
+    legend pos=north east,
+    width=0.9\linewidth,
+    height=0.7\linewidth,
+    scale only axis,
+    xmin=0,
+    ymin=0,
+    grid=both,
+    tick align=outside,
+    tickpos=left,
+    minor x tick num=3,
+    minor y tick num=4,
+    minor grid style={dotted,thin},
+    x tick label style={/pgf/number format/.cd,%
+      set thousands separator={},
+      set decimal separator={,}
+    },%
+    y tick label style={/pgf/number format/.cd,%
+      set thousands separator={},
+      set decimal separator={,}
+    },%
+  }
+}
+
+% Anhänge für Original-Messdaten
+\usepackage{fancyvrb}
+
+% redefine \VerbatimInput
+\RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}%
+{fontsize=\footnotesize,
+ %
+ frame=lines,  % top and bottom rule only
+ framesep=2em, % separation between frame and text
+ fontsize=\scriptsize,
+ %
+ labelposition=topline,
+ %
+ commandchars=\|\(\), % escape character and argument delimiters for
+                      % commands within the verbatim
+ commentchar=*        % comment character
+}
+
+% Polar Plots
+\usetikzlibrary{pgfplots.polar}
+% Verwende deutsche Bezeichner für Inhaltsverzeichnis, ... (ngerman = New German: neue Rechtschreibung)
+\usepackage{ngerman}
+% Deutsche Zahlen (entfernt z.B. das Leerzeichen nach einem Dezimal-Komma)
+\usepackage{ziffer} 
+
+\usepackage[verbose]{placeins}
+
+%wegen Grafikverschiebung hinzugefügt
+\usepackage{float}
+
+%\usepackage{graphicx}
+%\usepackage{caption}
+\usepackage{subcaption} %Für subfigures
+
+% PDF-Optionen
+\hypersetup{%
+  pdftitle={TU Darmstadt \- Physikalisches Praktikum für Fortgeschrittene},
+  pdfauthor={Esra Bauer und Sören Link},
+  pdfsubject={Versuch 5.4},
+  pdfview=FitH,
+}
+% Nummeriere formeln in Subsections einzeln
+% Kleines makro zur assymetrischen Fehlerangabe
+
+% Entspricht-Zeichen
+\usepackage{scalerel}
+
+\newcommand\equalhat{%
+\let\savearraystretch\arraystretch
+\renewcommand\arraystretch{0.3}
+\begin{array}{c}
+\stretchto{
+    \scalerel*[\widthof{=}]{\wedge}
+    {\rule{1ex}{3ex}}%
+}{0.5ex}\\ 
+=%
+\end{array}
+\let\arraystretch\savearraystretch
+}
+%BEGINN TITELSEITE
+
+\title{Tieftemperaturmessung an suprafluidem Helium}
+
+\subtitle{Esra Bauer \\Sören Link}
+
+\subsubtitle{Betreuer: M.Sc. Michael Lannert \hfill Versuchsdatum: 1. Juni 2015}
+
+\author{Esra Bauer, Sören Link}
+
+%\settitlepicture{img/title.jpg}
+
+\institution{Physikalisches Praktikum \\für Fortgeschrittene \\ Versuch 5.4}
+
+\date{\today}
+
+
+%ENDE TITELSEITE
+
+\begin{document}
+%ANFANG DOKUMENT
+
+%Titelseite einfügen
+\maketitle
+
+%Inhaltsverzeichnis einfügen
+\tableofcontents
+
+%ANFANG INHALT
+
+\chapter{Einleitung}
+
+In diesem Versuch geht es um Temperaturmessung im Bereich von etwa 1 bis 5 K. Diese Temperaturen erzeugen wir in einem mit flüssigem Helium gefüllten Badkryostaten. Die Messung erfolgt mittels eines sekundären Thermometers in Form einer paramagnetischen Substanz, die zunächst mittels bekannter Messpunkte kalibriert werden muss. Damit können wir schließlich den sog. $\lambda$-Punkt von Helium bestimmen, unterhalb dessen die Suprafluidität eintritt, d.h. das flüssige Helium verliert seine Viskosität und verändert seine Eigenschaften bezüglich Wärmeleitfähigkeit und Wärmekapazität, was auch im Folgenden betrachtet wird.
+
+\chapter{Grundlagen}
+
+\section{Kühlverfahren zum Erreichen der Suprafluidität}
+
+Es gibt verschiedene Kühlverfahren, mit denen es möglich ist, sehr tiefe Temperaturen zu erzeugen. Man kann beispielsweise den Joule-Thomson-Effekt nutzen, d.h. die Abkühlung von Gasen bei Expansion, sofern dies unterhalb der jeweiligen Inversionstemperatur geschieht (bei Helium 43 K). Auch die adiabatische Entmagnetisierung ist eine Möglichkeit der Kühlung, bei der die Entropie eines ungeordneten Spinsystems durch Anlegen eines äußeren Magnetfeldes erniedrigt wird und somit Wärme an ein äußeres Wärmebad abgegeben wird. Zusätzlich kann eine Kernentmagnetisierung erfolgen, mit der eine Kühlung bis hinab in den Mikrokelvinbereich möglich ist. Für uns von Beudeutung ist jedoch vor allem die Verdampfungskühlung, da diese im Versuch verwendet wird. Dabei wird das Helium, welches im Kryostaten verdampft, oben abgesaugt, wodurch der Druck vermindert wird. Dadurch gehen Teilchen, welche eine höhere kinetische Energie als der Mittelwert besitzen, aus der Flüssigkeit in Dampf über. Durch Abpumpen dieser Teilchen verringert man nun die mittlere kinetische Energie des Systems, was in einer Erniedrigung der Temperatur resultiert. Durch diese Art der Kühlung lässt sich in einem $^4$He-Bad eine Temperatur von etwa 0,8 K aufrechterhalten. 
+
+\section{Thermometrie bei tiefen Temperaturen}
+
+Man unterscheidet bei den Thermometern grundsätzlich zwischen primären und sekundären Thermometern. Primäre sind solche, an denen man die Temperatur ohne Kalibrierung direkt ablesen kann. Sekundäre Thermometer müssen erst an primären kalibriert werden, wobei wir die Kalibrierung mittels der ITS-90 (Internationale Temperaturskala) und ihrer 17 Fixpunkte sowie der Dampfdruckkurve von $^4$He vornehmen. Das Thermometer muss eine Substanz sein, die temperaturabhängig charakteristische Eigenschaften verändert. Neben Thermoelementen, Dioden, die ihre Kennlinie temperaturabhängig verändern, Widerständen und Kapazitäten sind zum Beispiel die im Versuch verwendeten Paramagneten geeignet, da die Magnetisierung neben des äußeren Magnetfeldes auch von der Temperatur abhängt. Die Grundlagen dieser Abhängigkeit werden im folgenden Abschnitt beleuchtet.
+
+\section{Paramagnetismus}
+
+Wir betrachten einen idealen Paramagneten mit N magnetischen Momenten, wobei wir zunächst die Wechselwirkung zwischen den magnetischen Momenten vernachlässigen. Diese sind gegeben durch $\vec{\mu} = -g_j \mu_B \vec{J}$, wobei $g_J$ der gyromagnetische Faktor ist, $\mu_B$ das Bohrsche Magneton und $\vec{J}$ der Gesamtdrehimpuls. Im äußeren Magnetfeld gibt es nur zwei Zustände, und zwar die parallele oder die antiparallele Ausrichtung der magnetischen Momente. Deren Energie ist
+$$E_{\pm} = \mp \vec{\mu} \cdot \vec{B} = \pm g_j \mu_B \vec{J} \cdot \vec{B}.$$
+Die Boltzmann-Statistik liefert uns die Besetzungszahlen der Zustände als $N_{\pm} = N \frac{e^{\pm z}}{e^z + e^{-z}}$, wobei hier $\frac{g_j \mu_B \vec{J} \cdot \vec{B}}{k_B T} =: z$ substituiert wurde. Die gesamte Magnetisierung des Paramagneten ist dann gegeben durch 
+$$M = |\vec{\mu}| (N_+ - N_-) = N |\vec{\mu}| \frac{e^z - e^{-z}}{e^z + e^{-z}} = N |\vec{\mu}| tanh(z) ,$$ was sich für $z \ll 1$ nähern lässt zu $tanh(z) \approx z$ und somit 
+$$M = N |\vec{\mu}| \frac{g_j \mu_B \vec{J} \cdot \vec{B}}{k_B T}.$$
+Die magnetische Suszeptibilität ist definiert als $\chi = \frac{\partial M}{\partial B}$, wodurch sich nach Anwendung auf unseren Ausdruck für $M$ gerade $\chi = \frac{C}{T}$ mit einer Konstanten $C$ ergibt. Dies ist das Curie-Gesetz und $C$ ist die Curie-Konstante.
+
+Berücksichtigt man zusätzlich die Wechselwirkung zwischen den magnetischen Momenten, ist es sinnvoll einen Mean-Field-Ansatz zu machen, d.h. eine Näherung aus der statistischen Physik, bei der vernachlässigt wird, dass jedes Teilchen durch sein Verhalten das Feld lokal verändert. Man erhält daraus das Curie-Weiss-Gesetz $\chi = \frac{C}{T- \Sigma}$ mit der Curie-Temperatur $\Sigma = \alpha C$.
+
+\section{Eigenschaften von $^3$He und $^4$He}
+
+Da $^3$He im Vergleich zu $^4$He sehr selten ist, reicht es im Prinzip aus, die Eigenschaften von $^4$He zu betrachten, da diese auf das verwendete Helium zutreffen werden. Zudem ist der Lambdapunkt von $^3$He viel geringer und wird im Versuch nicht erreicht. Wichtig ist für uns der Lambdapunkt von $^4$He, welcher bei etwa 2,2 K liegt. Direkt unterhalb dieses Punktes geht die Wärmekapazität gegen Unendlich und verläuft in Form eines $\lambda$-Zeichens, woher auch der Name resultiert. Dies ist in folgender Grafik veranschaulicht: 
+
+\begin{figure}[h] 
+  \centering
+     \includegraphics[width=0.4\textwidth]{data/lambda.jpg}
+  \caption{Spezifische Wärmekapazität von $^4$He über der Temperatur. \cite{wiki}}  
+  \label{fig:Bild1}
+\end{figure}
+
+Zudem erhöht sich die Wärmeleitfähigkeit im suprafluidem Zustand sehr stark, was das visuelle Erkennen des Lambdapunktes möglich macht, da durch die hohe Wärmeleitfähigkeit das Sieden an der Oberfläche beendet wird und die Oberfläche ruhig wird. Die wichtigsten Eigenschaften der beiden Isotope sind in folgender Tabelle aufgelistet: 
+
+\begin{center}
+  \begin{tabular}{|p{5cm}|p{3cm}|p{3cm}|}
+    \hline
+    & $^3$He & $^4$He \\ \hline
+    Teilchenart & Fermion & Boson  \\ \hline
+    Spin & 1/2 & 1  \\ \hline
+    Lambdapunkt & 0,0025 K & 2,1768 K  \\ \hline
+    Siedepunkt bei 1 bar & 3,19 K & 4,21 K  \\ \hline
+	\end{tabular}
+\end{center}
+
+\chapter{Aufbau und Durchführung}
+
+Der verwendete Badkryostat besteht aus einem äußeren Dewargefäß, welches zur Vorkühlung und Isolation mit flüssigem Stickstoff befüllt wird, sowie aus einem innerem Dewargefäß, dessen Zwischenraum mit einer Turbomolekularpumpe evakuiert wird und welches mit flüssigem Helium befüllt wird. Im Probenraum des Badkryostaten befindet sich die von flüssigem Helium umgebene paramagnetische Probe in einem Spulensystem gemäß folgender Skizze: 
+
+\begin{figure}[h] 
+  \centering
+     \includegraphics[width=0.4\textwidth]{data/Aufbau.jpg}
+  \caption{Aufbau zur Messung der magnetischen Suszeptibilität. \cite{anleitung}}  
+  \label{fig:Bild1}
+\end{figure}
+
+
+An der Primärspule liegt eine Referenz-Wechselspannung an, die in den astatisch gewickelten Sekundärspulen Spannungen induzieren, die sich ohne Probe im Idealfall gerade aufheben sollten. Tatsächlich tritt aber immer ein Leersignal auf, außerdme befindet sich die Probe in einer der Sekundärspulen. D.h. die gemessene Spannung besteht aus zwei Anteilen: 
+\begin{center}
+    $U_{total}(T) = U_{leer} + U_{Probe}(T)$
+\end{center}
+
+
+Sie ist proportional zur magnetischen Suszeptibilität der Probe. In einem Lock-In-Verstärker wird die Spannung $U_{total}(T)$ mittels der Referenzspannung moduliert, was in einer Gleichspannung resultiert, die wir messen. Später erfolgt eine Temperatur-Kalibration. Im oberen Teil des heliumgefüllten Dewargefäßes ist außerdem ein Druckmessgerät angeschlossen.
+
+Zuerst muss der Kryostat befüllt werden. Nachdem das äußere Dewargefäß mit flüssigem Stickstoff befüllt worden ist, kann Helium in den Probenraum übergehoben werden. Da wir nach dem Prinzip der Verdampfungskühlung arbeiten, muss im Folgenden Helium aus dem inneren Dewargefäß in die Helium-Rückleitung abgepumpt werden, um hinreichend tiefe Temperaturen zu erreichen. Dazu steht uns eine Drehschieber-Vakuumpumpe zur Verfügung, deren Saugleistung über ein grobes und ein feines Regelventil gedrosselt werden kann. 
+
+\section{Aufnahme der Abkühlkurve}
+
+Zunächst nehmen wir die Spannungswerte für den Abkühlvorgang auf. Dazu öffnen wir schrittweise die Regelventile der Vakuumpumpe und senken damit den Druck und somit die Temperatur. Durch gleichzeitiges Ablesen der Spannung nehmen wir 20 Wertepaare zwischen 744 Torr und 4 Torr auf, was Temperaturen zwischen 4,2 K und 1,5 K entspricht.
+
+\section{Aufnahme der Aufwärmkurve}
+
+Anschließend werden die Regelventile geschlossen und die Drehschieberpumpe abgestellt. Durch die Erwärmung des Heliums erfolgt ein Druckanstieg, wobei wir wieder die Spannung ablesen und auf diese Weise 31 Wertepaare von 4 Torr bis 220 Torr aufnehmen.
+
+\chapter{Auswertung}
+
+\section{Druckkorrektur}
+
+Da der Druck nicht direkt am Probenort gemessen wird, sondern an der Oberfläche des Heliumbehälters, muss die Druckdifferenz betrachtet werden, die durch das Gewicht der Heliumsäule oberhalb der Probe entsteht. Der Druck am Probenort berechnet sich wie folgt: 
+$$p_{Probe} = p_{oben} + p_{He} = p_{oben} + \rho_{He} h g$$
+mit der Füllhöhe h des flüssigen Heliums und dessen Dichte $\rho_{He} = 0,145 ~ \frac{g}{cm^3}$. Da am Kryostaten eine Skala angebracht ist, deren Nullpunkt am Probenort liegt, kann die Höhe direkt abgelesen werden. Beim Abkühlvorgang wurde die Höhe dreimal abgelesen und zweimal (zu Beginn und zum Ende) beim Aufwärmen. In folgender Tabelle sind die gemessenen Füllhöhen sowie die Korrekturwerte inkl. der sich dadurch ergebenden Temperaturkorrekturen aufgelistet:
+
+\begin{center}
+  \begin{tabular}{p{1.6cm}|p{2.4cm}|p{1.6cm}|p{2cm}|p{2.4cm}|p{2cm}}
+    T in K & $p_{oben}$ in Torr & h in cm & $\Delta p$ in Torr & $p_{Probe}$ in Torr & $\Delta T$ in K  \\ \hline
+    4,2    & 744                & 22,2    & 2,369              & 746,369             & 0.0029           \\ \hline
+    2,27   & 47                 & 13,5    & 1,440              & 48,440              & 0.00025          \\ \hline
+    1,5    & 4                  & 10,8    & 1,152              & 5,152               & 0.00028          \\
+	\end{tabular}
+\end{center}
+
+\section{Überprüfung des Curie- und Curie-Weiss-Gesetzes}
+Zur Kalibrierung des sekundären Thermometers, welches im Prinzip aus einer
+Induktionsspule mit einem Paramagneten als Kern besteht, haben wir die in der
+Spule induzierte Spannung in Abhängigkeit des Dampfdruckes des Heliums
+aufgenommen. Das Helium wurde durch Abpumpen von Heliumgas aus dem Probenraum
+abgekühlt. Da der Prozess entlang der Dampfdruckkurve des Heliums abläuft, kann
+diese zur direkten Bestimmung der Temperatur und so zur Kalibrierung des
+sekundären Thermometers benutzt werden.
+
+An hand der aufgenommenen Daten kann zudem überprüft werden, ob die Suszeptibilität
+des verwendete Paramagneten dem Curie- oder Curie-Weiss-Gesetz folgt.
+\begin{figure}[H]
+\begin{tikzpicture}
+\begin{axis}[
+  default,
+  title={Kalibration des sekundären Thermometers},
+  xlabel=$T$ in $K$,
+  ylabel=$U_{ind}$ in $mV$,
+  xmin=1.4,
+  xmax=4.4,
+  ymin=0,
+  ymax=370,
+  height=0.5\linewidth
+]
+\addplot[
+  red, only marks, mark=+, mark size=1pt, error bars/.cd, 
+  y dir=both, y explicit, x dir=both, x fixed relative=0.005
+] table[x index=0, y index=1, y error index=2] {data/abkuehlen.txt};
+\addlegendentry{Messpunkte}
+\addplot[teal, mark=x, mark size=0pt, samples=40, domain=1.4:4.4] {-151.706+753.243/x};
+\addlegendentry{Curie-Fit}
+\addplot[orange, mark=x, mark size=0pt, samples=40, domain=1.4:4.4] {-155.706+769.835/(0.0247+x)};
+\addlegendentry{Curie-Weiss-Fit}
+\end{axis}
+\end{tikzpicture}
+    \caption{Induzierte Spannung in Abhängigkeit der Temperatur. Die Spannung
+        ist Proportional zur Magnetisierung und somit auch zur Suszeptibilität des
+        Paramagneten. Sowohl der Curie als auch der Curie-Weiss fit stimmen sehr gut
+        mit den gemessenen Daten überin. Lediglich an den rändern des Graphen ist
+        optisch ein Unterschied der beiden Fits zu bemerken, im Bereich höherer
+        Temperaturen scheint sogar der Curie-Fit eher mit den Messdaten überein zu stimmen}
+\end{figure}
+
+Auf Grund der Ähnlichkeit des Curie- und des Curie-Weiss Fits und der Tatsache,
+dass die Standardabweichungen im Curie-Fit deutlich geringer sind, entscheiden wir
+uns für die Curie-Gleichung zur Kalibrierung des sekundären
+Thermometers. Umgestellt nach T ergibt sich somit:
+$$T(U_{ind}) = \frac{C}{U_{ind}-U_0}$$ 
+
+Einsetzen der Fit Paramter liefert:
+$$T(U_{ind}) = \frac{753,24mV \cdot K}{U_{ind}+151,71mV}$$ 
+
+
+\subsection{Fit Parameter}
+Für den Curie-Fit gehen wir von einer Funktion der Form $\chi(T) \propto U_{ind}(T)
+= \frac{C}{T} + U_0$ aus.
+Es ergeben sich folgende Fit-Werte
+\begin{center}
+  \begin{tabular}{l|llll}
+    \text{} & Wert     & Standardabweichung & t-Statistik & P-Wert                  \\ \hline
+    $C  $   & 753,243  & 5,35434            & 140,679     & $1,9388 \cdot 10^{-31}$ \\
+    $U_0$   & -151,706 & 2,43924            & -62,1941    & $2,2906 \cdot 10^{-24}$ \\
+  \end{tabular}
+\end{center}
+
+
+Für den Curie-Weiss-Fit gehen wir von einer Funktion der Form $\chi(T) \propto
+U_{ind}(T) = \frac{C}{T-\theta} + U_0$ aus.
+Es ergeben sich folgende Fit-Werte
+\begin{center}
+  \begin{tabular}{l|llll}
+             & Wert       & Standardabweichung & t-Statistik & P-Wert                  \\ \hline
+    $C     $ & 769,835    & 44,7269            & 17,2119     & $4,7859 \cdot 10^{-13}$ \\
+    $U_0   $ & -155,027   & 9,18241            & -16,8831    & $6,7582 \cdot 10^{-13}$ \\
+    $\theta$ & -0,0246869 & 0,0657462          & -0,375489   & 0,711456                \\
+  \end{tabular}
+\end{center}
+
+\section{Verlauf der Aufwärmung}
+\begin{figure}[H]
+\begin{tikzpicture}
+\begin{axis}[
+  default,
+  legend pos=north west,
+  title={Temperatur- und Druckverlauf beim Aufwärmen},
+  xlabel=$T$ in $K$,
+  ylabel=$\rho$ in $Torr$,
+  xmin=1.5,
+  xmax=2.3,
+  ymin=0,
+  ymax=230,
+  height=0.5\linewidth
+]
+\addplot[
+  red, only marks, mark=+, mark size=1pt, error bars/.cd, 
+  y dir=both, y fixed=0.5, x dir=both, x explicit
+] table[
+  x expr=753.24/(\thisrowno{1}+151.71), y index=0, 
+  x error expr=((5.35/(\thisrowno{1}+151.71))^2+(5.95)(753.24/(\thisrowno{1}+151.71)^2)^2)^0.5
+] {data/aufwaermen.txt};
+\addlegendentry{Messpunkte}
+\addplot[blue, mark=x, mark size=0pt, samples=4, domain=1.4:2.3] {-79.276+51.9875*x};
+\addplot[blue, mark=x, mark size=0pt, samples=4, domain=1.4:2.3] {-5150.69+2387.87*x};
+\addlegendentry{Fitgeraden}
+\end{axis}
+\end{tikzpicture}
+    \caption{Druck in Abhägngikeit der Temperatur beim Aufwärmen des
+      Heliums. Sowohl vor als auch nach dem optisch ermittelten Lambdapunkt
+      wurden Fitgeraden durch die Messwerte gelegt. Der Schnittpunkt der Geraden
+      bezeichnet den ermittelten Wert für den Lambda-Punkt.}
+\end{figure}
+
+Durch fitten von Geraden durch die Messwerte vor und nach dem Knick in der
+Steigung der Messwerte lässt sich ein experimenteller Wert für den Lambda-Punkt
+ermitteln. In unserem Fall liegt dieser bei 
+$$T_{\lambda}=2,17109K$$
+was einer Abweichung von $0,0057K$ bzw.\ $0,26\%$ vom Literaturwert von
+$2,1768K$ entspricht.
+
+Die geringe Abweichung vom Literaturwert lässt darauf schließen, dass die
+Kalibrierung des sekundären Thermometers sehr gut gelungen ist.
+
+\subsection{Fit Parameter}
+Beide Geraden wurden nach der Formel $f(x) = a \cdot x + b$ gefittet.
+\begin{center}
+  \begin{tabular}{l|llll}
+      & Wert & Standardabweichung & t-Statistik & P-Wert                \\ \hline
+    a & 51,9875  & 2.52496        & 20,5895     & $2,070 \cdot 10^{-12}$ \\
+    b & -79,276  & 4.84489        & -16,3628    & $5,654 \cdot 10^{-11}$ \\
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{l|llll}
+      & Wert     & Standardabweichung & t-Statistik & P-Wert                 \\ \hline
+    a & 2387,87  & 140,675            & 16,9744     & $9,378 \cdot 10^{-10}$ \\
+    b & -5150,69 & 309,992            & -16,6156    & $1,200 \cdot 10^{-9}$  \\
+  \end{tabular}
+\end{center}
+\section{Wärmefluss in das Helium}
+Die benötigte zugeführte Wärmeenergie $dQ$ bei einer Temperaturänderung $dT$
+ergibt sich mit:
+$$dQ = m \cdot c_{He} \cdot dT$$
+
+Da während des Aufwärmprozesses allerdings Helium verdampft ist, muss der
+Ausdruck für die Wärmeenergie noch um die Verdampfungswärme ergänzt werden. Man
+erhält
+
+$$Q = m \cdot \int_{T_0}^{T_1}dT c_{He}(T) + Q_v \cdot N$$
+mit der molaren Verdampfungswärme $Q_v$ und der Anzahl der Mols $N =
+\frac{m}{m_{mol}} = \frac{\pi r^2 \rho_{He}\cdot \Delta h}{m_{mol}}$.
+
+Der Höhenunterschied $\Delta h$zwischen Beginn und Ende des Aufwärmvorgangs
+beträgt in unserem fall $2 cm$. Damit ergibt sich eine Verdampfungswärme von 
+
+$$Q_V = 0,364 Mol \cdot 93\frac{J}{Mol} = 33,7J$$
+
+Zur korrekten Bestimmung von $Q$ müsste das Integral $\int_{T_0}^{T_1}dT
+c_{He}(T)$ bestimmt werden, wozu eine Funtkion für $c(T)$ bekannt sein
+müsste. Uns liegen jedoch lediglich diskrete Werte für $c(T)$ vor, weswegen wir die
+deponierte Wärmemenge linear für jeweils 2 benachtbarte Messpunkte interpolieren
+und aufaddieren:
+
+$$Q_T = m \cdot \sum \limits_{i=2}^n \frac{C(T_n) + C(T_{n-1})}{2} \cdot (T_n -
+  T_{n-1}) = m \cdot 0,716 \frac{J}{kg} = 55,84 J$$
+
+Insgesamt ergibt sich also 
+$$Q = Q_T + Q_V = 89,54J$$
+
+Theoretisch ergibt sich alleine für die Wärmeaufnahme während der 6490 Sekunden
+dauernden Aufwärmphase des Heliums durch Wärmestrahlung des Stickstoffes
+
+$$Q_S = \sigma T^4 A \cdot \Delta t = 416,1J$$
+
+Wobei die vom Helium ausgesandte Strahlung auf Grund der Abhängigkeit von $T^4$
+vernachlässigt wurde.
+
+Tatsächlich erreicht ein großer Teil dieser Strahlung das Helium allerdings auf
+Grund des verspiegelten Dewar-Gefäßes nicht.
+
+\chapter{Fazit}
+In diesem Versuch konnten wir mit Hilfe eines Badkryostaten an Hand der
+Dampfdruckkurve des abkühlenden Heliums ein sekundäres Thermometer kalibrieren. Dieses haben
+wir anschließend während der Aufwärmphase des Heliums erfolgreich zur Bestimmung
+der Temperatur benutzen könen. Dadurch ist es uns gelungen, den
+Lambda-Punkt von Helium mit erstaunlicher Genauigkeit zu bestimmen.
+%ENDE INHALT
+\cleardoublepage{}
+% Eintrag fürs Inhaltsverzeichnis
+\newpage
+\begin{thebibliography}{100}
+  \bibitem{anleitung} Versuchsanleitung zum Versuch Tieftemperaturmessung, heruntergeladen am 09.06.2015 von der Homepage der TU Darmstadt
+  \bibitem{wiki} Grafik aus dem Artikel Lambda point aus Wikipedia, der freien Enzyklopädie am 21.6.2015 \url{https://upload.wikimedia.org/wikipedia/commons/7/7b/Lambda_transition.svg}
+  
+\end{thebibliography}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
