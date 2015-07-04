@@ -25,7 +25,7 @@
 \pgfkeys{%
   /pgfplots/default/.style={%
     /pgf/number format/use comma,
-    legend pos=north east,
+    legend pos=north west,
     width=0.9\linewidth,
     height=0.7\linewidth,
     scale only axis,
@@ -37,14 +37,6 @@
     minor x tick num=3,
     minor y tick num=4,
     minor grid style={dotted,thin},
-    x tick label style={/pgf/number format/.cd,%
-      set thousands separator={},
-      set decimal separator={,}
-    },%
-    y tick label style={/pgf/number format/.cd,%
-      set thousands separator={},
-      set decimal separator={,}
-    },%
   }
 }
 
@@ -207,16 +199,62 @@ Da das Signal, welches der Detektor liefert, sehr schwach ist, muss es direkt hi
 \chapter{Auswertung}
 
 \section{Kalibration der Energieskala}
-
+\begin{figure}[H]
+\begin{tikzpicture}
+\begin{axis}[
+  default,
+  title={Kalibration des Halbleiterdetektors},
+  xlabel=Kanal,
+  ylabel=Counts,
+  xmin=0,
+  xmax=1024,
+  ymode=log,
+  ymax=50000,
+  height=0.5\linewidth
+]
+\addplot[
+  red, only marks, mark=+, mark size=2pt
+] table[x expr=\coordindex+1, y index=0] {data/CALIBR.dat};
+\addlegendentry{Messpunkte}
+\end{axis}
+\end{tikzpicture}
+    \caption{}
+\end{figure}
 
 \section{Energie- und Intensitätsverteilung der $\alpha$-Linien}
 \begin{figure}[H]
 \begin{tikzpicture}
 \begin{axis}[
   default,
+  title={$\alpha$-Spektrum des $^{241}$Am},
+  xlabel=Kanal,
+  ylabel=Counts,
+  xmin=925,
+  xmax=985,
+  ymode=log,
+  ymin=0,
+  ymax=50000,
+  height=0.5\linewidth
+]
+\addplot[
+  red, only marks, mark=+, mark size=2pt
+] table[x expr=\coordindex+1, y index=0] {data/AMSPKTR.dat};
+\addlegendentry{Messpunkte}
+\end{axis}
+\end{tikzpicture}
+    \caption{}
+\end{figure}
+
+\section{Energieverlust von $\alpha$-Strahlung in Luft}
+\begin{figure}[H]
+\begin{tikzpicture}
+\begin{axis}[
+  default,
   title={Kalibration des sekundären Thermometers},
-  xlabel=$T$ in $K$,
-  ylabel=$U_{ind}$ in $mV$,
+  xlabel=Kanal,
+  ylabel=Counts,
+  xmin=0,
+  xmax=850,
   ymin=0,
   ymax=550,
   height=0.5\linewidth
@@ -234,9 +272,6 @@ Da das Signal, welches der Detektor liefert, sehr schwach ist, muss es direkt hi
 \end{tikzpicture}
     \caption{}
 \end{figure}
-
-\section{Energieverlust von $\alpha$-Strahlung in Luft}
-
 
 \chapter{Fazit}
 %ENDE INHALT
