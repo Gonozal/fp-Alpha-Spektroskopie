@@ -263,40 +263,12 @@ Da das Signal, welches der Detektor liefert, sehr schwach ist, muss es direkt hi
 \end{figure}
 
 \section{Energie- und Intensitätsverteilung der $\alpha$-Linien}
-\begin{figure}[H]
-\begin{tikzpicture}
-\begin{axis}[
-  default,
-  title={$\alpha$-Spektrum des $^{241}$Am},
-  xlabel=Energie in $MeV$,
-  ylabel=Counts,
-  xtick={5.2,5.24,...,5.6},
-  xmin=5.29148,
-  xmax=5.57206,
-  ymode=log,
-  ymin=1,
-  ymax=50000,
-  height=0.5\linewidth
-]
-  \addplot[
-    black, only marks, mark=+, mark size=2pt
-  ] table[x index=0, y index=1] {data/AMSPKTR-calibrated.DAT};
-  \addplot[red, mark=x, mark size=0pt, samples=100, domain=5.2:5.6] {
-    179.98083064597083/e^(3276.8137586914486*(-5.532251161263617 + x)^2)
-  };
-  \addplot[red, mark=x, mark size=0pt, samples=100, domain=5.2:5.6] {
-    23121.685532406682/e^(4787.937399842504*(-5.485742592479443 + x)^2)
-  };
-  \addplot[red, mark=x, mark size=0pt, samples=100, domain=5.2:5.6] {
-    3892.0824027134386/e^(2989.06638728987*(-5.447727311666542 + x)^2)
-  };
-  \addplot[red, mark=x, mark size=0pt, samples=100, domain=5.2:5.6] {
-    514.4605013396027/e^(2758.7022185396663*(-5.391949185663305 + x)^2)
-  };
-\addlegendentry{Messpunkte}
-\end{axis}
-\end{tikzpicture}
-    \caption{}
+\begin{figure}[h] 
+  \centering
+     \includegraphics[width=1\textwidth]{img/alpha-spektrum.png}
+  \caption{$\alpha$-Spektrum von $^{241}Am$ mit Untergrund, Gauß- und
+    Summe aus allen Untergrund- und Gauß-Fits.}
+  \label{fig:Bild1}
 \end{figure}
 
 \section{Energieverlust von $\alpha$-Strahlung in Luft}
