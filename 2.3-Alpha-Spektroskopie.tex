@@ -25,7 +25,7 @@
 \pgfkeys{%
   /pgfplots/default/.style={%
     /pgf/number format/use comma,
-    legend pos=north east,
+    legend pos=north west,
     width=0.9\linewidth,
     height=0.7\linewidth,
     scale only axis,
@@ -35,16 +35,8 @@
     tick align=outside,
     tickpos=left,
     minor x tick num=3,
-    minor y tick num=4,
+    minor y tick num=3,
     minor grid style={dotted,thin},
-    x tick label style={/pgf/number format/.cd,%
-      set thousands separator={},
-      set decimal separator={,}
-    },%
-    y tick label style={/pgf/number format/.cd,%
-      set thousands separator={},
-      set decimal separator={,}
-    },%
   }
 }
 
@@ -218,16 +210,116 @@ Zuletzt muss die Apparatur belüftet werden, um den Energieverlust der $\alpha$-
 \chapter{Auswertung}
 
 \section{Kalibration der Energieskala}
-
+\begin{figure}[h]
+\begin{tikzpicture}
+\begin{axis}[
+    default,
+    title={Kalibration des Halbleiterdetektors},
+    xlabel=Kanal,
+    ylabel=Counts,
+    xmin=0,
+    xmax=1024,
+    ymode=log,
+    ymin=1,
+    ymax=100000,
+    width=0.4\textwidth,
+    height=0.4\textwidth
+  ]
+  \addplot[
+  black, only marks, mark=+, mark size=2pt
+  ] table[x expr=\coordindex+1, y index=0] {data/CALIBR.dat};
+  \addlegendentry{Messpunkte}
+  \addplot[red, mark=x, mark size=0pt, samples=100, domain=14:54] 
+    {7011.605764712136/e^(0.29434965581444056*(-33.67872074878762 + x)^2)};
+  \addplot[red, mark=x, mark size=0pt, samples=100, domain=118:158] 
+    {7717.455825318301/e^(0.30789071693589276*(-138.25335222258695 + x)^2)};
+  \addplot[red, mark=x, mark size=0pt, samples=100, domain=432:472] 
+    {6904.329823546912/e^(0.31021660410784563*(-452.90210260199433 + x)^2)};
+  \addplot[red, mark=x, mark size=0pt, samples=100, domain=948:988] 
+    {13050.635733856781/e^(0.4405445287921415*(-968.7432082800937 + x)^2)};
+  \addlegendentry{Peak-Fits}
+\end{axis}
+\end{tikzpicture}
+%
+\begin{tikzpicture}
+\begin{axis}[
+    default,
+    title={Kalibration des Halbleiterdetektors},
+    xlabel=Kanal,
+    ylabel=Energie in $KeV$,
+    xmin=0,
+    xmax=1000,
+    ymin=0,
+    ymax=6000,
+    width=0.4\textwidth,
+    height=0.4\textwidth
+  ]
+  \addplot[black, only marks,mark=+, mark size=2pt, 
+    error bars/.cd, y dir=both, y explicit
+  ] table[x index=0, y index=1, y error index=2] {data/CALIBR-fitted.dat};
+  \addlegendentry{Messpunkte}
+  \addplot[red, mark=x, mark size=0pt, samples=100, domain=0:1000] 
+    {357.4458819940879 + 5.294028183565216*x};
+  \addlegendentry{Kalibrationsfit}
+  \addplot[pink, mark=x, mark size=0pt, samples=100, domain=0:1000] 
+    {357.4458819940879 + 5.294028183565216*x - 4.302652729749464* 
+      (129.33390238062464 - 0.26700597705105833*x + 0.00013781903972842876*x^2)^0.5};
+  \addplot[pink, mark=x, mark size=0pt, samples=100, domain=0:1000]
+    {357.4458819940879 + 5.294028183565216*x + 4.302652729749464* 
+      (129.33390238062464 - 0.26700597705105833*x + 0.00013781903972842876*x^2)^0.5};
+  \addlegendentry{95\%-Fit}
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{Kalibration}
+\end{figure}
 
 \section{Energie- und Intensitätsverteilung der $\alpha$-Linien}
 \begin{figure}[H]
 \begin{tikzpicture}
 \begin{axis}[
   default,
+  title={$\alpha$-Spektrum des $^{241}$Am},
+  xlabel=Energie in $MeV$,
+  ylabel=Counts,
+  xtick={5.2,5.24,...,5.6},
+  xmin=5.29148,
+  xmax=5.57206,
+  ymode=log,
+  ymin=1,
+  ymax=50000,
+  height=0.5\linewidth
+]
+  \addplot[
+    black, only marks, mark=+, mark size=2pt
+  ] table[x index=0, y index=1] {data/AMSPKTR-calibrated.DAT};
+  \addplot[red, mark=x, mark size=0pt, samples=100, domain=5.2:5.6] {
+    179.98083064597083/e^(3276.8137586914486*(-5.532251161263617 + x)^2)
+  };
+  \addplot[red, mark=x, mark size=0pt, samples=100, domain=5.2:5.6] {
+    23121.685532406682/e^(4787.937399842504*(-5.485742592479443 + x)^2)
+  };
+  \addplot[red, mark=x, mark size=0pt, samples=100, domain=5.2:5.6] {
+    3892.0824027134386/e^(2989.06638728987*(-5.447727311666542 + x)^2)
+  };
+  \addplot[red, mark=x, mark size=0pt, samples=100, domain=5.2:5.6] {
+    514.4605013396027/e^(2758.7022185396663*(-5.391949185663305 + x)^2)
+  };
+\addlegendentry{Messpunkte}
+\end{axis}
+\end{tikzpicture}
+    \caption{}
+\end{figure}
+
+\section{Energieverlust von $\alpha$-Strahlung in Luft}
+\begin{figure}[H]
+\begin{tikzpicture}
+\begin{axis}[
+  default,
   title={Kalibration des sekundären Thermometers},
-  xlabel=$T$ in $K$,
-  ylabel=$U_{ind}$ in $mV$,
+  xlabel=Kanal,
+  ylabel=Counts,
+  xmin=0,
+  xmax=850,
   ymin=0,
   ymax=550,
   height=0.5\linewidth
@@ -245,9 +337,6 @@ Zuletzt muss die Apparatur belüftet werden, um den Energieverlust der $\alpha$-
 \end{tikzpicture}
     \caption{}
 \end{figure}
-
-\section{Energieverlust von $\alpha$-Strahlung in Luft}
-
 
 \chapter{Fazit}
 %ENDE INHALT
