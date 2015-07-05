@@ -210,6 +210,12 @@ Zuletzt muss die Apparatur belüftet werden, um den Energieverlust der $\alpha$-
 \chapter{Auswertung}
 
 \section{Kalibration der Energieskala}
+
+Wie oben erwähnt, wird die prominente Linie (bei 5,486 MeV) des $\alpha$-Spektrums als bekannt vorausgesetzt und die Amplitude es Pulsgenerators auf diese Energie eingestellt. Die anderen Kalibrationspunkte werden bei Abschwächung um den Faktor 2 und 5 aufgenommen. Im ersten Schritt werden nun die Messereignisse des Pulsers über den Kanalnummern aufgetragen und gefittet. Die Breite der Pulserlinien ist daher von Belang, da sie den Anteil des elektronischen Rauschens anzeigt. Dadurch, dass die Energie von 5,486 MeV bekannt ist, kann nun durch diese 4 Messungen eine Kalibrationsgerade berechnet werden, die in der zweiten Grafik dargestellt ist. Da bei Reduzierung auf $\frac{1}{10}$ der Amplitude der Fehler sinnvollerweise bezogen auf $\frac{9}{10}$ des Wertes berechnet wird, ist es natürlich, dass der Fehler für kleinere Energien zunimmt, wie im Graphen zu sehen ist. Zudem sind Steigung und Achsenabschnitt korreliert, wodurch keine Gaußsche Fehlerfortpflanzung angewendet werden kann; der Fehler ergibt sich vielmehr mit der Korrelationsmatrix C zu:
+$$\Delta E^2 = \sum_{ij} \frac{\partial E}{\partial x_i} \frac{\partial E}{\partial x_j} \Delta x_i \Delta x_j C_{ij}$$
+
+Zur Kontrolle fertigen wir eine grafische Auftragung von $\Delta E$ über E an. Von nun an können sämtliche Ergebnisse in Abhängigkeit der Energie und nicht mehr von Kanälen betrachtet werden.
+
 \begin{figure}[h]
 \begin{tikzpicture}
 \begin{axis}[
@@ -227,7 +233,7 @@ Zuletzt muss die Apparatur belüftet werden, um den Energieverlust der $\alpha$-
   ]
   \addplot[
   black, only marks, mark=+, mark size=2pt
-  ] table[x expr=\coordindex+1, y index=0] {data/CALIBR.dat};
+  ] table[x expr=\coordindex+1, y index=0] {data/CALIBR.DAT};
   \addlegendentry{Messpunkte}
   \addplot[red, mark=x, mark size=0pt, samples=100, domain=14:54] 
     {7011.605764712136/e^(0.29434965581444056*(-33.67872074878762 + x)^2)};
@@ -256,7 +262,7 @@ Zuletzt muss die Apparatur belüftet werden, um den Energieverlust der $\alpha$-
   ]
   \addplot[black, only marks,mark=+, mark size=2pt, 
     error bars/.cd, y dir=both, y explicit
-  ] table[x index=0, y index=1, y error index=2] {data/CALIBR-fitted.dat};
+  ] table[x index=0, y index=1, y error index=2] {data/CALIBR-fitted.DAT};
   \addlegendentry{Messpunkte}
   \addplot[red, mark=x, mark size=0pt, samples=100, domain=0:1000] 
     {357.4458819940879 + 5.294028183565216*x};
@@ -274,6 +280,10 @@ Zuletzt muss die Apparatur belüftet werden, um den Energieverlust der $\alpha$-
 \end{figure}
 
 \section{Energie- und Intensitätsverteilung der $\alpha$-Linien}
+
+Im Folgenden betrachten wir das $\alpha$-Spektrum von $^{241}Am$ inkl. Hintergrundstrahlung. Zu erwarten wären 3 überlagerte Exponentialfunktionen aufgrund der Hintergrundstrahlung, was wir mittels eines Fits in logarithmischer Darstellung bestätigen können, hier erhalten wir 3 Geraden. Zu sehen sind außerdem die Gauß-Fits für die drei erwarteten $\alpha$-Peaks und einen vierten Peak bei höherer Energie. Es wurde mit folgenden Fit-Parametern gearbeitet: 
+
+
 \begin{figure}[h] 
   \centering
      \includegraphics[width=1\textwidth]{img/alpha-spektrum.png}
@@ -281,6 +291,20 @@ Zuletzt muss die Apparatur belüftet werden, um den Energieverlust der $\alpha$-
     Summe aus allen Untergrund- und Gauß-Fits.}
   \label{fig:Bild1}
 \end{figure}
+
+Nach der Gamow-Theorie müsste der Transmissionskoeffizient die Abhängigkeit $T = e^G$ erfüllen, wie weiter oben beschrieben. Die relative Häufigkeit h, die von der Energie abhängt, ist proportional zu T. Der Gamow-Faktor unseres Experiments lässt sich aus dem Inversen der Energie berechnen:
+
+\begin{center}
+  \begin{tabular}{|p{4cm}|p{5cm}|}
+    \hline
+    ln(h) & G in 1/keV \\ \hline
+      & 1,817$\cdot 10^{-4}$  \\ \hline
+       & 1,831$\cdot 10^{-4}$  \\ \hline
+      & 1,851$\cdot 10^{-4}$ \\ \hline
+        \end{tabular}
+\end{center}
+
+Trägt man nun den Logarithmus der relativen Häufigkeit h über dem experimentellen Gamow-Faktor auf, sollte sich also eine Gerade ergeben.
 
 \section{Energieverlust von $\alpha$-Strahlung in Luft}
 \begin{figure}[H]
@@ -309,6 +333,33 @@ Zuletzt muss die Apparatur belüftet werden, um den Energieverlust der $\alpha$-
 \end{tikzpicture}
     \caption{}
 \end{figure}
+
+Zur Überprüfung der Theorie wird die Bethe-Bloch-Gleichung herangezogen, die weiter oben schon eingeführt wurde (hier in einer Form in Abhängig der kinetischen Energie, die für unsere Zwecke dienlicher ist): 
+
+$$\frac{dE}{dx} = - \frac{Z z^2 e^4 N_A M_{\alpha}}{8 \pi \epsilon_o^2 m_e E_{kin} M_A}~\rho ~ ln \left( \frac{4 m_e E_{kin}}{I m_{\alpha}} \right),$$
+
+wobei
+$Z = 7,21$ die Ordnungszahl des bestrahlten Materials, hier eine Näherung für 79 \% Stickstoff und 21 \% Sauerstoff,
+
+$z = 2$ die Ladungszahl eines $\alpha$-Teilchens,
+
+$e = 1,6021 \cdot 10^{-19}~C$ die Elementarladung,
+
+$N_A = 6,02214 \cdot 10^{23}~ \frac{1}{mol}$ die Avogadro-Konstante, 
+
+$m_{\alpha} = 6,644 \cdot 10^{-27} kg$ die Masse eines $\alpha$-Teilchens,
+
+$\epsilon_0 = 8,8541 \cdot 10^{-12}~ \frac{F}{M}$ die Permittivitätskonstante,
+
+$E_{kin} = 5485~keV$ die Energie des $\alpha$-Teilchens,
+
+$M_A = 28,9~ \frac{g}{mol}$ die Molmasse der bestrahlten Materie, 
+
+$\rho = 1,225~ \frac{kg}{m^3}$ die Dichte von Luft,
+
+$m_e = 9,109 \cdot 10^{31}~ kg$ die Elektronenmasse und
+
+$I = 10~ eV \cdot Z$ die Bloch-Näherung des mittleren Anregungspotentials der Luftteilchen ist.
 
 \chapter{Fazit}
 %ENDE INHALT
