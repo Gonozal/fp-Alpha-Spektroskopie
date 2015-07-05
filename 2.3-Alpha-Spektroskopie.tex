@@ -137,8 +137,8 @@ In diesem Versuch geht es um die $\alpha$-Spektroskopie mit einem Halbleiterzäh
 
 \section{$\alpha$-Zerfall}
 
-Alphazerfall ist eine Art des radioaktiven Zerfalls von Atomkernen. Der zerfallende Atomkern sendet einen Helium-4-Atomkern aus (Alphateilchen), wodurch die Massezahl des Mutterkerns um vier Einheiten un die Kernladungszahl um zwei Einheiten abnimmt. Beim Zerfall wird kinetische Energie frei, welche sich im umgekehrten Verhältnis der beiden Massen verteilt. Das Alphateilchen erfährt die attraktive starke Wechselwirkung, die eine kurze Reichweite besitzt, sowie Repulsion durch das Coulombpotential. Zusätzlich muss die Auswirkung des Kerndrehimpulses berücksichtigt werden. Durch den Zerfall wird die Energie des Teilchen in den quasigebundenen Bereich E > 0 angehoben, wodurch es mittels des quantenmechanischen Tunneleffektes das Coloumbpotential durchdringen kann. Mit Drehimpulskorrektur ergibt sich der folgende Hamiltonoperator: 
-$$\hat{H} = \frac{-\hbar^2 \nabla^2}{2 m} – V_C(r) - \frac{l(l+1) \hbar^2}{2 m r^2},$$
+Alphazerfall ist eine Art des radioaktiven Zerfalls von Atomkernen. Der zerfallende Atomkern sendet einen Helium-4-Atomkern aus (Alphateilchen), wodurch die Massezahl des Mutterkerns um vier Einheiten und die Kernladungszahl um zwei Einheiten abnimmt. Beim Zerfall wird kinetische Energie frei, welche sich im umgekehrten Verhältnis der beiden Massen verteilt. Das Alphateilchen erfährt die attraktive starke Wechselwirkung, die eine kurze Reichweite besitzt, sowie Repulsion durch das Coulombpotential. Zusätzlich muss die Auswirkung des Kerndrehimpulses berücksichtigt werden. Durch den Zerfall wird die Energie des Teilchen in den quasigebundenen Bereich E > 0 angehoben, wodurch es mittels des quantenmechanischen Tunneleffektes das Coloumbpotential durchdringen kann. Mit Drehimpulskorrektur ergibt sich der folgende Hamiltonoperator: 
+$$\hat{H} = \frac{-\hbar^2 \nabla^2}{2 m} - V_C(r) - \frac{l(l+1) \hbar^2}{2 m r^2},$$
 wobei $V_C(r)$ das Coulombpotential ist und der letzte Term die Drehimpulskorrektur darstellt.
 Der Transmissionskoeffizient ergibt sich als Quotient der transmittierten und der einlaufenden Betragsquadrate der Wellenfunktionen: $T = \frac{|\psi_t|^2}{|\psi_e|^2}$, was sich mit der Lösung der Schrödingergleichung schreiben lässt als $T \approx e^G$, wobei der sogenannte Gamow-Faktor G gegeben ist durch:
 $$G = \frac{2 \sqrt{2 m}}{\hbar}\int_R^{R'} \sqrt{\frac{Z_1Z_2e^2}{r}-E} dr.$$
@@ -187,6 +187,9 @@ Da das Signal, welches der Detektor liefert, sehr schwach ist, muss es direkt hi
 \chapter{Aufbau und Durchführung}
 
 \section{Versuchsaufbau}
+
+Der Silizium-Halbleiterzähler sitzt in einem evakuierbaren Behälter, an dessen anderen Ende ein verschiebbarer Stab mit 5 mm-Skaleneinteilung einmontiert ist. Dort kann dann der $\alpha$-Strahler eingesetzt werden und somit der Abstand zwischen Detektor und Quelle verändert werden. Die Evakuierung des Behälters erfolgt bei Bedarf mittels einer Vakuumpumpe. Folgende Grafik zeigt die elektronische Verschaltung des Detektors: 
+
 \begin{figure}[h] 
   \centering
      \includegraphics[width=0.8\textwidth]{img/Aufbau.png}
@@ -194,7 +197,15 @@ Da das Signal, welches der Detektor liefert, sehr schwach ist, muss es direkt hi
   \label{fig:Bild1}
 \end{figure}
 
-\section{Durchfürhung}
+Die Notwendigkeit des Vorverstärkers wurde oben bereits erklärt. Der Pulser wird für die Energiekalibrierung benötigt. 
+
+\section{Durchführung}
+
+Zunächst wird die Quelle eingesetzt und die Apparatur evakuiert, indem die Vakuumpumpe eingeschaltet wird. Dann wird die Versorgungsspannung für den Detektor langsam auf 50 V erhöht und das Spektrum des $^{241}Am$ aufgenommen. Die Verstärkung am Hauptverstärker und die Einstellung des Analog-Digital-Konverter (ADC) werden so gewählt, dass die Linien noch gut getrennt werden können. Zudem wird die Energieauflösung durch Minimierung der Halbwertsbreite der prominenten $\alpha$-Linie optimiert. 
+
+Danach kann der Pulser in Betrieb genommen werden, um später die Kalibrierung von Kanälen auf Energien vornehmen zu können. Dazu wählen wir die prominente $\alpha$-Linie und setzen eine Pulserlinie auf deren Position. Danach misst man die Pulserlinien bei der halben Energie, $\frac{1}{5}$ der Energie und $\frac{1}{10}$ der Energie. Somit stehen ausreichend Daten für die Kalibrierung zur Verfügung. 
+
+Zuletzt muss die Apparatur belüftet werden, um den Energieverlust der $\alpha$-Strahlung in Luft bestimmen zu können. Mittels der Skala des Stabes, auf dem die Quelle sitzt, wird der Abstand jeweils um 5 mm vergrößert. Beim kleinsten Abstand beträgt die Messzeit ca. $\frac{1}{2}$ bis eine Minute, die anderen Messzeiten werden derart verlängert, dass bei jeder Messung etwa die gleiche statistische Genauigkeit erreicht wird. 
 
 \chapter{Auswertung}
 
