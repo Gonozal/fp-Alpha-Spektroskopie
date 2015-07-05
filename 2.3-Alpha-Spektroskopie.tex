@@ -311,24 +311,63 @@ Trägt man nun den Logarithmus der relativen Häufigkeit h über dem experimente
 \begin{tikzpicture}
 \begin{axis}[
   default,
-  title={Kalibration des sekundären Thermometers},
+  title={Energie der $\alpha$-Teilchen nach Abschwächung in Luft},
   xlabel=Kanal,
   ylabel=Counts,
-  xmin=0,
-  xmax=850,
+  xmin=0.4,
+  xmax=4.6,
   ymin=0,
-  ymax=550,
+  ymax=600,
   height=0.5\linewidth
 ]
 \addplot[
   red, only marks, mark=+, mark size=1pt
 %, error bars/.cd, y dir=both, y explicit, x dir=both, x fixed relative=0.005
-] table[x expr=\coordindex+1, y index=0] {data/AIR.DAT};
+] table[x index=0, y index=1] {data/AIR-calibrated.DAT};
 \addlegendentry{Messpunkte}
-%\addplot[teal, mark=x, mark size=0pt, samples=40, domain=1.4:4.4] {-151.706+753.243/x};
-%\addlegendentry{Curie-Fit}
-%\addplot[orange, mark=x, mark size=0pt, samples=40, domain=1.4:4.4] {-155.706+769.835/(0.0247+x)};
-%\addlegendentry{Curie-Weiss-Fit}
+\addplot[teal, mark=x, mark size=0pt, samples=90, domain=0.477248:1.41739]
+  {445.380553898739/e^(48.44172152945642*(-0.9473213873547632 + x)^2)};
+\addplot[teal, mark=x, mark size=0pt, samples=90, domain=1.55859:2.24107]
+  {455.86445110751987/e^(92.12416060907515*(-1.8998315841676692 + x)^2)};
+\addplot[teal, mark=x, mark size=0pt, samples=90, domain=2.353:2.91426]
+  {490.5108636019834/e^(137.14324811061056*(-2.6336282164915703 + x)^2)};
+\addplot[teal, mark=x, mark size=0pt, samples=90, domain=3.01741:3.49809]
+  {482.01991029115703/e^(186.6794574467247*(-3.2577535628208882 + x)^2)};
+\addplot[teal, mark=x, mark size=0pt, samples=90, domain=3.60023:4.04528]
+  {569.6474125773229/e^(221.1388260746228*(-3.822755317076578 + x)^2)};
+\addplot[teal, mark=x, mark size=0pt, samples=90, domain=4.11438:4.55057]
+  {520.7021560215843/e^(228.3261697968165*(-4.3324730153056015 + x)^2)};
+\addlegendentry{Gauss-Fits}
+
+\end{axis}
+\end{tikzpicture}
+    \caption{}
+\end{figure}
+
+
+\begin{figure}[H]
+\begin{tikzpicture}
+\begin{axis}[
+  default,
+  legend pos=north east,
+  title={Vergleich der gemessenen $\alpha$-Teilchen Energien mit der Theorie},
+  xlabel=Kanal,
+  ylabel=Counts,
+  xmin=0,
+  xmax=5,
+  ymin=0,
+  ymax=220,
+  height=0.5\linewidth
+]
+\addplot[
+  black, only marks, mark=+, mark size=1pt
+%, error bars/.cd, y dir=both, y explicit, x dir=both, x fixed relative=0.005
+] table[x index=0, y index=1] {data/AIR-dEdS.DAT};
+\addlegendentry{Messpunkte}
+\addplot[red, mark=x, mark size=0pt, samples=200, domain=0:5]
+  {(74.0011121*ln(6.3219688*x)/x};
+\addlegendentry{Theorie nach Bethe-Bloch}
+
 \end{axis}
 \end{tikzpicture}
     \caption{}
