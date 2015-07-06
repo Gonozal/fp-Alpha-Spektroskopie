@@ -211,10 +211,28 @@ Zuletzt muss die Apparatur belüftet werden, um den Energieverlust der $\alpha$-
 
 \section{Kalibration der Energieskala}
 
-Wie oben erwähnt, wird die prominente Linie (bei 5,486 MeV) des $\alpha$-Spektrums als bekannt vorausgesetzt und die Amplitude es Pulsgenerators auf diese Energie eingestellt. Die anderen Kalibrationspunkte werden bei Abschwächung um den Faktor 2 und 5 aufgenommen. Im ersten Schritt werden nun die Messereignisse des Pulsers über den Kanalnummern aufgetragen und gefittet. Die Breite der Pulserlinien ist daher von Belang, da sie den Anteil des elektronischen Rauschens anzeigt. Dadurch, dass die Energie von 5,486 MeV bekannt ist, kann nun durch diese 4 Messungen eine Kalibrationsgerade berechnet werden, die in der zweiten Grafik dargestellt ist. Da bei Reduzierung auf $\frac{1}{10}$ der Amplitude der Fehler sinnvollerweise bezogen auf $\frac{9}{10}$ des Wertes berechnet wird, ist es natürlich, dass der Fehler für kleinere Energien zunimmt, wie im Graphen zu sehen ist. Zudem sind Steigung und Achsenabschnitt korreliert, wodurch keine Gaußsche Fehlerfortpflanzung angewendet werden kann; der Fehler ergibt sich vielmehr mit der Korrelationsmatrix C zu:
-$$\Delta E^2 = \sum_{ij} \frac{\partial E}{\partial x_i} \frac{\partial E}{\partial x_j} \Delta x_i \Delta x_j C_{ij}$$
+Wie oben erwähnt, wird die prominente Linie (bei 5,486 MeV) des
+$\alpha$-Spektrums als bekannt vorausgesetzt und die Amplitude es Pulsgenerators
+auf diese Energie eingestellt. Die anderen Kalibrationspunkte werden bei
+Abschwächung um den Faktor 2 und 5 aufgenommen. Im ersten Schritt werden nun die
+Messereignisse des Pulsers über den Kanalnummern aufgetragen und gefittet. Die
+Breite der Pulserlinien ist daher von Belang, da sie den Anteil des
+elektronischen Rauschens anzeigt. Dadurch, dass die Energie von 5,486 MeV
+bekannt ist, kann nun durch diese 4 Messungen eine Kalibrationsgerade berechnet
+werden, die in der zweiten Grafik dargestellt ist. Da bei Reduzierung auf
+$\frac{1}{10}$ der Amplitude der Fehler sinnvollerweise bezogen auf
+$\frac{9}{10}$ des Wertes berechnet wird, ist es natürlich, dass der Fehler für
+kleinere Energien zunimmt, wie im Graphen zu sehen ist. 
 
-Zur Kontrolle fertigen wir eine grafische Auftragung von $\Delta E$ über E an. Von nun an können sämtliche Ergebnisse in Abhängigkeit der Energie und nicht mehr von Kanälen betrachtet werden.
+
+% Die Korrelation ist praktisch nicht vorhanden, denke der Meinte eine
+% Korrelation mit anderen Werten. Eventuell mit der Einstellung auf einen
+% gewissen Kanal? Weiß aber nicht genau, wo ich dann die Korrelationsmatrix
+% herbekommen soll.
+
+% Zudem sind Steigung und Achsenabschnitt korreliert, wodurch keine Gaußsche Fehlerfortpflanzung angewendet werden kann; der Fehler ergibt sich vielmehr mit der Korrelationsmatrix C zu:
+% $$\Delta E^2 = \sum_{ij} \frac{\partial E}{\partial x_i} \frac{\partial E}{\partial x_j} \Delta x_i \Delta x_j C_{ij}$$
+% Zur Kontrolle fertigen wir eine grafische Auftragung von $\Delta E$ über E an. Von nun an können sämtliche Ergebnisse in Abhängigkeit der Energie und nicht mehr von Kanälen betrachtet werden.
 
 \begin{figure}[h]
 \begin{tikzpicture}
@@ -252,7 +270,7 @@ Zur Kontrolle fertigen wir eine grafische Auftragung von $\Delta E$ über E an. 
     default,
     title={Kalibration des Halbleiterdetektors},
     xlabel=Kanal,
-    ylabel=Energie in $KeV$,
+    ylabel=Energie in $keV$,
     xmin=0,
     xmax=1000,
     ymin=0,
@@ -261,8 +279,8 @@ Zur Kontrolle fertigen wir eine grafische Auftragung von $\Delta E$ über E an. 
     height=0.4\textwidth
   ]
   \addplot[black, only marks,mark=+, mark size=2pt, 
-    error bars/.cd, y dir=both, y explicit
-  ] table[x index=0, y index=1, y error index=2] {data/CALIBR-fitted.DAT};
+    error bars/.cd, y dir=both, y explicit, x dir=both, x explicit
+  ] table[x index=0, y index=1, y error index=2, x error index=3] {data/CALIBR-fitted.DAT};
   \addlegendentry{Messpunkte}
   \addplot[red, mark=x, mark size=0pt, samples=100, domain=0:1000] 
     {357.4458819940879 + 5.294028183565216*x};
@@ -276,15 +294,51 @@ Zur Kontrolle fertigen wir eine grafische Auftragung von $\Delta E$ über E an. 
   \addlegendentry{95\%-Fit}
 \end{axis}
 \end{tikzpicture}
-\captionof{figure}{Kalibration}
+\captionof{figure}{Kalibration der Energieskala des Halbleiterdetektors. Die vom
+Pulsgeber erzeugen Energien liegen beinahe perfekt auf einer Gerade, der
+abgeschätze Fehler von 5\% der Energiedifferenz zum Ausgangspuls liegt weit über
+dem beobachtetem Wert.}
 \end{figure}
+
+\subsection{Fit-Parameter}
+Die Pulse vom Pulsgeber wurden mit einem Gauß-Fit der Form 
+$$f(x)=\frac{k e^{-\frac{(x-\mu )^2}{2 \sigma ^2}}}{\sqrt{2 \pi } \sigma }$$
+angefittet, wobei wir folgende Parameter erhalten haben:
+
+\begin{figure}[H]
+\centering
+    \includegraphics[scale=1]{img/kalibr-gauss-fits-parameter.png}
+\end{figure}
+
+Die Fitparamter für die Gerade der form $f(x)=a \cdot x + b$ lauten:
+\begin{figure}[H]
+\centering
+    \includegraphics[scale=1]{img/kalibr-gerade-fit-parameter}
+\end{figure}
+
+
+
 
 \section{Energie- und Intensitätsverteilung der $\alpha$-Linien}
 
-Im Folgenden betrachten wir das $\alpha$-Spektrum von $^{241}Am$ inkl. Hintergrundstrahlung. Zu erwarten wären 3 überlagerte Exponentialfunktionen aufgrund der Hintergrundstrahlung, was wir mittels eines Fits in logarithmischer Darstellung bestätigen können, hier erhalten wir 3 Geraden. Zu sehen sind außerdem die Gauß-Fits für die drei erwarteten $\alpha$-Peaks und einen vierten Peak bei höherer Energie. Es wurde mit folgenden Fit-Parametern gearbeitet: 
+Im Folgenden betrachten wir das $\alpha$-Spektrum von $^{241}Am$
+inkl. Hintergrundstrahlung. 
 
+Wir fitten zuerst eine e-Funktion an den Untergrund vor den $\alpha$-Peaks. Da
+dieser Untergrund zum größten Teil durch den Hauptpeak ausgelöst wird,
+subtrahieren wir die gefittete Funktion für den Untergrund von allen Werte bis
+zu diesem Peak. Anschließend fitten wir eine Gauß-Funktion an den genannten Peak
+und subtrahieren auch diese von den Messpunkten. Dies wird für alle 4 Peaks in
+der Reihenfolge ihrer Intensität durchgeführt, wobei wir auf grund der geringen
+Intensität für den letzten Peak keinen Untergrund mehr herausrechnen. Die so
+gefitteten Funktionen liefern uns hinreichend genaue Startwerte, um im weiteren
+eine Überlagerung der 3 Exponential- und 4 Gaußfunktionen an den ursprünglichen
+Datensatz zu fitten.
 
-\begin{figure}[h] 
+Durch diese vorgehensweise ergeben sich genauere Werte für die 4 $\alpha$-Peaks,
+als wenn wir einfach 4 Gauß-Funktionen nach Augenmaß an die Messdaten gefittet hätten.
+
+\begin{figure}[H] 
   \centering
      \includegraphics[width=1\textwidth]{img/alpha-spektrum.png}
   \caption{$\alpha$-Spektrum von $^{241}Am$ mit Untergrund, Gauß- und
@@ -292,33 +346,124 @@ Im Folgenden betrachten wir das $\alpha$-Spektrum von $^{241}Am$ inkl. Hintergru
   \label{fig:Bild1}
 \end{figure}
 
+
+\begin{center}
+  \begin{tabular}{l|l|l|l}
+    $E_{exp}$ in $keV$ & rel. Häufigkeit & $E_{lit}$ in keV & Literaturwert rel. Häufigkeit \\ \hline
+    $5393 \pm 2.02$    & 0,0181          & 5388,23          & 0,016                         \\
+    $5448 \pm 0.29$    & 0,170           & 5442,8           & 0,13                          \\
+    $5486 \pm 0.04$    & 0,803           & 5485,56          & 0,845                         \\
+    $5529 \pm 3.57$    & 0,0089          & 5511,47          & 0,0022                        \\
+  \end{tabular}
+\end{center}
+
+Die gute Übereinstimmung des Hauptpeaks mit den Literaturwerten ist dadurch zu
+erklären, dass wir diesen zur Kalibration unserer Energieskala verwendet
+haben. Allerdings sind auch die übrigen Messergebnisse nahe an den
+Literaturwerten, auch wenn diese nicht ganz im berechenten Unsicherheitsintervall liegen.
+
+
+\subsection{Fit-Parameter}
+Nach seperaten fits zum finden geeigneter Startwerte, wurde eine Funktion der
+Form
+$$f(x)=a_1 e^{b_1 x}+a_2 e^{b_2 x}+a_3 e^{b_3 x}+\frac{k_1 e^{-\frac{\left(x-\mu _1\right){}^2}{2 \sigma _1^2}}}{\sqrt{2 \pi } \sigma _1}+\frac{k_2 e^{-\frac{\left(x-\mu _2\right){}^2}{2 \sigma _2^2}}}{\sqrt{2 \pi } \sigma _2}+\frac{k_3 e^{-\frac{\left(x-\mu _3\right){}^2}{2 \sigma _3^2}}}{\sqrt{2 \pi } \sigma _3}+\frac{k_4 e^{-\frac{\left(x-\mu _4\right){}^2}{2 \sigma _4^2}}}{\sqrt{2 \pi } \sigma _4}$$
+
+an die Messdaten gefittet. Hierbei handelt es sich um eine Überlagerung von 3
+expoentialfunktionen für den von den Peaks verursachten Untergrund und 4
+Gauß-Funktionen, welche die Peaks an sich ebschreiben. Dabei sind die Geraden, welche den Untergrund
+beschreiben, nur bis zum Maximum des jeweiligen $\alpha-$ Peaks definiert.
+Wir erhalten folgende Fit-Parameter:
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[H]{0.44\textwidth}
+        \includegraphics[scale=1]{img/alpha-exp-fits-parameter.png}
+    \end{subfigure}%
+    \qquad
+    ~%add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+        %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[H]{0.44\textwidth}
+        \includegraphics[scale=1]{img/alpha-gauss-fits-parameter.png}
+    \end{subfigure}
+\end{figure}
+
+
+\subsection{Vergleich mit der Gamow-Theorie}
 Nach der Gamow-Theorie müsste der Transmissionskoeffizient die Abhängigkeit $T = e^G$ erfüllen, wie weiter oben beschrieben. Die relative Häufigkeit h, die von der Energie abhängt, ist proportional zu T. Der Gamow-Faktor unseres Experiments lässt sich aus dem Inversen der Energie berechnen:
 
 \begin{center}
   \begin{tabular}{|p{4cm}|p{5cm}|}
     \hline
-    ln(h) & G in 1/keV \\ \hline
-      & 1,817$\cdot 10^{-4}$  \\ \hline
-       & 1,831$\cdot 10^{-4}$  \\ \hline
-      & 1,851$\cdot 10^{-4}$ \\ \hline
-        \end{tabular}
+    ln(h)  & G in 1/keV            \\ \hline
+    -4,012 & 1,8228$\cdot 10^{-4}$ \\ \hline
+    -1,772 & 1,8355$\cdot 10^{-4}$ \\ \hline
+    -0,219 & 1,8544$\cdot 10^{-4}$ \\ \hline
+    \end{tabular}
 \end{center}
 
 Trägt man nun den Logarithmus der relativen Häufigkeit h über dem experimentellen Gamow-Faktor auf, sollte sich also eine Gerade ergeben.
+
 
 \section{Energieverlust von $\alpha$-Strahlung in Luft}
 \begin{figure}[H]
 \begin{tikzpicture}
 \begin{axis}[
   default,
+  title={Vergleich der gemessenen Werte mit der Gamow-Theorie},
+  xlabel=G in $keV^{-1}$,
+  ylabel=ln(h),
+  xmin=1.82,
+  xmax=1.86,
+  ymin=-5,
+  ymax=1,
+  height=0.5\linewidth
+]
+\addplot[
+  black, only marks, mark=+, mark size=1pt %, error bars/.cd, y dir=both, y explicit, x dir=both, x fixed relative=0.005
+] plot coordinates {
+    (1.8228,-4.012)
+    (1.8355,-1.772)
+    (1.8544,-0.219)
+}; 
+\addlegendentry{Experimentelle Werte}
+\addplot[red, mark=x, mark size=0pt, samples=5, domain=1.82:1.86]
+  {-148.78958843635712 + 79.75346478832577*x};
+\addlegendentry{Fit-Gerade}
+\end{axis}
+\end{tikzpicture}
+    \caption{der logarithmus der relativen Intensität der einzelnen Peaks
+      aufgetragen über den Gamow-Faktor.}
+\end{figure}
+
+Leider konnten wir den erwarteten Zusammenhang zwischen der Gamow-Theorie und
+den gemessenen Werten nicht herstellen. Dies liegt vermutlich da dran, dass die
+relative Intensität für den Hauptpeak des verwendeten Amerikanums bei uns mit
+80\% sehr gering ausfiehl. Hier wäre ein um 5\% höherer Wert zu erwartet
+gewesen.
+
+
+\section{Energieverlust von $\alpha$-Strahlung in Luft}
+Zur Bestimmung des Energieverlustest der $\alpha$ Strahlung in der Luft, fitten
+wir Gauß-Funktionen an alle aufgenommenen Peaks. An hand dieser lässt sich dann
+die Energiedifferenz zweier Peaks bestimmen. Zusammen mit dem Wissen, dass die
+Peaks im Abstand vom 5mm aufgenommen wurden, kann man aus diesen Werten den
+Energieverlust der $\alpha$-Teilchen pro mm errechnen. Der energieverlust
+errechnet sich zu $\frac{E_2-E_1}{\Delta s}$ mit den Energien $E_1$ und $E_2$
+zweier aufeinander folgender Peaks und dem Abstand $\Delta s=5mm$. Die Energie,
+für welche dieser Wert gilt, ergibt sich aus dem Mittelpunkt zwischen den beiden
+betrachteten Peaks $E_1+\frac{E_2-E1}{2}$
+\begin{figure}[H]
+\begin{tikzpicture}
+\begin{axis}[
+  default,
   title={Energie der $\alpha$-Teilchen nach Abschwächung in Luft},
   xlabel=Kanal,
-  ylabel=Counts,
+  ylabel=E in MeV,
   xmin=0.4,
   xmax=4.6,
   ymin=0,
   ymax=600,
-  height=0.5\linewidth
+  width=0.8\textwidth,
+  height=0.4\linewidth
 ]
 \addplot[
   red, only marks, mark=+, mark size=1pt
@@ -341,7 +486,7 @@ Trägt man nun den Logarithmus der relativen Häufigkeit h über dem experimente
 
 \end{axis}
 \end{tikzpicture}
-    \caption{}
+    \caption{Energie-Peaks der detektierten $\alpha$-Teilchen nach Abschwächung in Luft mit zunehmendem Abstand zur Quelle.}
 \end{figure}
 
 
@@ -351,13 +496,14 @@ Trägt man nun den Logarithmus der relativen Häufigkeit h über dem experimente
   default,
   legend pos=north east,
   title={Vergleich der gemessenen $\alpha$-Teilchen Energien mit der Theorie},
-  xlabel=Kanal,
-  ylabel=Counts,
+  xlabel=Energie in MeV,
+  ylabel=$\frac{dE}{ds}$ in $\frac{keV}{mm}$,
   xmin=0,
   xmax=5,
   ymin=0,
   ymax=220,
-  height=0.5\linewidth
+  width=0.8\textwidth,
+  height=0.4\linewidth
 ]
 \addplot[
   black, only marks, mark=+, mark size=1pt
@@ -368,9 +514,13 @@ Trägt man nun den Logarithmus der relativen Häufigkeit h über dem experimente
   {(74.0011121*ln(6.3219688*x)/x};
 \addlegendentry{Theorie nach Bethe-Bloch}
 
+
 \end{axis}
 \end{tikzpicture}
-    \caption{}
+    \caption{Vergleich der gemessenen Abschwächung der $\alpha$-Strahlung in
+      Luft mit der Theorie nach Bethe-Bloch. Zwar stimmt der qualitative Verlauf
+    der Messergebnisse gut mit der Theorie überein, jedoch liegt bei uns die
+    Abschwächung um einen konstanten Faktor über dem erwarteten Wert.}
 \end{figure}
 
 Zur Überprüfung der Theorie wird die Bethe-Bloch-Gleichung herangezogen, die weiter oben schon eingeführt wurde (hier in einer Form in Abhängig der kinetischen Energie, die für unsere Zwecke dienlicher ist): 
@@ -400,7 +550,25 @@ $m_e = 9,109 \cdot 10^{31}~ kg$ die Elektronenmasse und
 
 $I = 10~ eV \cdot Z$ die Bloch-Näherung des mittleren Anregungspotentials der Luftteilchen ist.
 
+\subsection{Fit-Parameter}
+Die gefitteten Gauß-Funktionen haben die Form von 
+$$f(x)=\frac{k e^{-\frac{(x-\mu )^2}{2 \sigma ^2}}}{\sqrt{2 \pi } \sigma }$$
+wodurch wir diese Fit-Parameter erhalten haben:
+\begin{figure}[H]
+\centering
+    \includegraphics[scale=1]{img/kalibr-gauss-fits-parameter.png}
+\end{figure}
+
 \chapter{Fazit}
+In diesem Versuch haben wir Grundlegende Erfahrungen, was den Umgang und die
+Kalibration von Halbleiterdetektoren angeht, gesammelt. Anschließend war es uns
+möglich, die Energien und relativen Häufigkeiten der 4 wahrscheinlichsten Alpha-Übergänge von
+Amerikanum-241 zu bestimmen, wobei wir erstmals ein iteratives Fit-Verfahren mit
+18 Parametern verwendet haben.
+
+Zuletzt gelang es uns, den qualitativen Verlauf der Bethe-Bloch Gleichung für
+die Abschwächung von Alpha-Strahlung in Luft zu reproduzieren, wobei der von uns
+gemessener Energieverlust deutlich über dem erwarteten lag.
 %ENDE INHALT
 \cleardoublepage{}
 % Eintrag fürs Inhaltsverzeichnis
