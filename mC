@@ -132,15 +132,15 @@
 
 \chapter{Einleitung}
 
-In diesem Versuch geht es um das Phänomen $\alpha$-Zerfall, genauer um die Vermessung des $\alpha$-Spektrums von $^{241}Am$ (Americium), um nach einer Energiekalibration das Spektrum mit den Literaturwerten (s.u.) vergleichen zu können. Dabei werden typische Geräte kernphysikalischer Messapparaturen vorgestellt sowie die Kopplung von Experiment und Rechner zur Auswertung verwendet. Ein Problem der $\alpha$-Spektroskopie ist dabei die geringe Reichweite bzw. die starke Abschwächung der Strahlung, wenn diese mit Materie wechselwirkt. Um dies zu verstehen, wollen wir weiterhin den Energieverlust der $\alpha$-Strahlung in Luft messen. Die Theorie hierfür wird durch die sog. Bethe-Bloch-Gleichung (s.u.) beschrieben, anhand derer wir unsere Ergebnisse dann einordnen können.
+In diesem Versuch geht es um die $\alpha$-Spektroskopie mit einem Halbleiterzähler, wir nehmen also mittels eines Halbleiterdetektors das Spektrum eines $\alpha$-Strahler (in diesem Fall $^{241}Am$) auf und kalibrieren die digitalisierte Messung anschließend auf die Energie einer als bekannt vorausgesetzten Linie. Im Versuch soll das Messsystem Halbleiterzähler verstanden und angewendet werden, sowie später auf dieser Basis der Energieverlust geladener Teilchen in Materie bestimmt werden (hier: $\alpha$-Teilchen in Luft).
 
 \chapter{Grundlagen}
 
 \section{$\alpha$-Zerfall}
 
 Alphazerfall ist eine Art des radioaktiven Zerfalls von Atomkernen. Der zerfallende Atomkern sendet einen Helium-4-Atomkern aus (Alphateilchen), wodurch die Massezahl des Mutterkerns um vier Einheiten und die Kernladungszahl um zwei Einheiten abnimmt. Beim Zerfall wird kinetische Energie frei, welche sich im umgekehrten Verhältnis der beiden Massen verteilt. Das Alphateilchen erfährt die attraktive starke Wechselwirkung, die eine kurze Reichweite besitzt, sowie Repulsion durch das Coulombpotential. Zusätzlich muss die Auswirkung des Kerndrehimpulses berücksichtigt werden. Durch den Zerfall wird die Energie des Teilchen in den quasigebundenen Bereich E > 0 angehoben, wodurch es mittels des quantenmechanischen Tunneleffektes das Coloumbpotential durchdringen kann. Mit Drehimpulskorrektur ergibt sich der folgende Hamiltonoperator: 
-$$\hat{H} = \frac{-\hbar^2 \nabla^2}{2 m_{\alpha}} - V_C(r) - \frac{l(l+1) \hbar^2}{2 M r^2},$$
-wobei $m_{\alpha}$ die Masse des Alphateilchens ist, folglich der erste Term die kinetische Energie repräsentiert, $V_C(r)$ das Coulombpotential ist und der letzte Term mit der Masse M des Mutterkerns die Drehimpulskorrektur darstellt.
+$$\hat{H} = \frac{-\hbar^2 \nabla^2}{2 m} - V_C(r) - \frac{l(l+1) \hbar^2}{2 m r^2},$$
+wobei $V_C(r)$ das Coulombpotential ist und der letzte Term die Drehimpulskorrektur darstellt.
 Der Transmissionskoeffizient ergibt sich als Quotient der transmittierten und der einlaufenden Betragsquadrate der Wellenfunktionen: $T = \frac{|\psi_t|^2}{|\psi_e|^2}$, was sich mit der Lösung der Schrödingergleichung schreiben lässt als $T \approx e^G$, wobei der sogenannte Gamow-Faktor G gegeben ist durch:
 $$G = \frac{2 \sqrt{2 m}}{\hbar}\int_R^{R'} \sqrt{\frac{Z_1Z_2e^2}{r}-E} dr.$$
 
@@ -158,14 +158,7 @@ Alphastrahlung ist zur Spektroskopie insofern geeignet, als dass jedes Isotop Li
         \end{tabular}
 \end{center}
 
-Die mittlere Lebensdauer des Isotops beträgt knapp 433 Jahre. Diese Daten lassen sich auch aus dem Zerfallsschema des Isotops ablesen (hier inkl. der Gammastrahlung des Tochternuklids Neptunium $^{237}$Np):
-
-\begin{figure}[H] 
-  \centering
-     \includegraphics[width=0.65\textwidth]{img/schema.jpg}
-  \caption{Zerfallsschema von $^{241}$Am mit $\gamma$-Strahlung aus dem Tochterkern $^{237}$Np. \cite{website}}
-  \label{fig:Bild1}
-\end{figure}
+Die mittlere Lebensdauer des Isotops beträgt 421,1 Jahre.
 
 \section{Energieverlust geladener Teilchen in Materie}
 
@@ -181,9 +174,7 @@ Der Verlauf des Energieverlustes von Alphateilchen in Luft ist durch die Bragg-K
 
 \section{Halbleiterdetektor}
 
-Um den Halbzeiterzähler zu erklären, ist es sinnvoll, sich einige grundlegende Eigenschaften von Halbleitern in Erinnerung zu rufen. Wir betrachten das Bändermodell, da durch Superposition der Atomorbitale die erlaubten Energieniveaus jeweils leicht nach oben und unten wandern und somit zu Energiebändern verschmieren bzw. die Lösung der Schrödingergleichung für ein einzelnes Elektron durch das Feld der Ionenrümpfe aufweicht. Bei Halbleitern sind Valenz- und Leitungsband durch eine schmale Bandlücke von einigen eV voneinander getrennt und dazwischen befindet sich die Fermi-Energie. Beispielsweise durch thermische Energiezufuhr oder Absorption eines Photons kann ein Elektron die Bandlücke überwinden und ins Leitungsband gelangen, was zu einem Defektelektron oder Loch im Valenzband führt. Sowohl Löcher als auch Elektronen sind bewegliche Ladungsträger und sind für die elektrische Leitfähigkeit  verantwortlich. Die intrinsische Leitfähigkeit des Halbleiters ohne Dotierung wird als Eigenleitfähigkeit bezeichnet. Sie nimmt mit der Temperatur zu. 
-
-Etwa in der Mitte der Bandlücke liegt beim Halbleiter die sog. Fermi-Energie, was sich aus der Fermi-Dirac-Statistik ergibt. Die Fermi-Energie beschreibt dabei diejenige Energie, bei der ein Elektronenzustand mit Wahrscheinlichkeit 0,5 besetzt ist (angenommen dort existiere ein Elektronenzustand). Durch Dotierung kann die Fermi-Energie im Halbleiter verschoben werden. Dabei wird der Halbleiter gezielt mit Elementen aus der dritten oder fünften Hauptgruppe verunreinigt. Aus der dritten Hauptgruppe entstammen Elektronenakzeptoren, d.h. oberhalb des Valenzbandes wird ein zusätzliches Energieband hinzugefügt, welches Elektronen aufnimmt. Das resultiert in positiver oder p-Dotierung, d.h. es überwiegt die Löcherleitung. Elemente aus der fünften Hauptgruppe dienen als Donatoren, d.h. knapp unterhalb des Leitungsbandes wird ein Elektronenspender hinzufügt und es überwiegt die Elektronenleitung (negative oder n-Dotierung). Bei beiden Dotierungsarten bleibt der Halbleiter allerdings nach außen elektrisch neutral.
+Um den Halbzeiterzähler zu erklären, ist es sinnvoll, sich einige grundlegende Eigenschaften von Halbleitern in Erinnerung zu rufen. Wir betrachten das Bändermodell, da durch Superposition der Atomorbitale die erlaubten Energieniveaus jeweils leicht nach oben und unten wandern und somit zu Energiebändern verschmieren bzw. die Lösung der Schrödingergleichung für ein einzelnes Elektron durch das Feld der Ionenrümpfe aufweicht. Bei Halbleitern sind Valenz- und Leitungsband durch eine schmale Bandlücke von einigen eV voneinander getrennt und dazwischen befindet sich die Fermi-Energie. Beispielsweise durch thermische Energiezufuhr oder Absorption eines Photons kann ein Elektron die Bandlücke überwinden und ins Leitungsband gelangen, was zu einem Defektelektron oder Loch im Valenzband führt. Sowohl Löcher als auch Elektronen sind bewegliche Ladungsträger und sind für die elektrische Leitfähigkeit  verantworlich. Die intrinsische Leitfähigkeit des Halbleiters ohne Dotierung wird als Eigenleitfähigkeit bezeichnet. Sie nimmt mit der Temperatur zu. Um die Fermi-Energie eines Halbleiters zu verschieben, bietet sich die Dotierung an. Dabei wird der Halbleiter gezielt mit Elementen aus der dritten oder fünften Hauptgruppe verunreinigt. Aus der dritten Hauptgruppe entstammen Elektronenakzeptoren, d.h. obrhalb des Valenzbandes wird ein zusätzliches Energieband hinzugefügt, welches Elektronen aufnimmt. Das resultiert in positiver oder p-Dotierung, d.h. es überwiegt die Löcherleitung. Elemente aus der fünften Hauptgruppe dienen als Donatoren, d.h. knapp unterhalb des Leitungsbandes wird ein Elektronenspender hinzufügt und es überwiegt die Elektronenleitung (negative oder n-Dotierung). Bei beiden Dotierungsarten bleibt der Halbleiter allerdings nach außen elektrisch neutral.
 
 Wenn nun ein p- und ein n-dotierter Halbleiter in Kontakt gebracht werden, bildet sich eine sogenannte Raumladungs- oder Verarmungszone aus. Zunächst diffundieren die freien Ladungsträger in das jeweils andere Halbleitermaterial und rekombinieren an der Grenzschicht. Dadurch bleiben Ionenrümpfe zurück, die im p-dotierten Halbleiter negativ geladen sind und positiv im n-dotierten. D.h. hierbei entsteht ein elektrisches Feld, welches der Diffusion entgegenwirkt und schließlich zum Gleichgewicht führt, wobei sich die Fermi-Energien der beiden Halbleiter angeglichen haben. Dies wird als Raumladungszone bezeichnet. Wird nun eine Spannung derart angelegt, dass der Minuspol am p-dotierten Halbleiter und der Pluspol am n-dotierten Halbleiter anliegen, vergrößert sich dieses elektrische Feld bzw. die Raumladungszone noch und es fließt nahezu kein Strom. In Durchlassrichtung (d.h. Minuspol an n-dotiertem und Pluspol an p-dotiertem Halbleiter) verkleinert sich die Raumladungszone und es fließt ein wesentlich größerer Strom.
 
@@ -322,29 +313,29 @@ Bei benutzung der für diese Messung relevanten Werte verschwinden alle Elemente
 aus $V_y$ mit Ausnahme des Elements 1,1 und die gesuchte Unsicherheit ergibt
 sich nach Einsetzen der Umkehrfunktion von $E(x)$ zu $$\Delta E(E)=\sqrt{4,9174 \cdot 10^{-6} x^2 - 0,0540x + 147,984}$$
 
-\begin{figure}[H]
+\begin{figure}
 \begin{tikzpicture}
 \begin{axis}[
     default,
     title={Unsicherheit der Energie im Bereich der Alpha-Peaks},
-    xlabel=Energie in $keV$,
-    ylabel=Energieunischerheit in $keV$,
+    xlabel=Kanal,
+    ylabel=Energie in $keV$,
     xmin=5000,
     xmax=6000,
-    ymin=0,
+    ymin=-0.1,
     ymax=1.5,
-    width=0.8\textwidth,
+    width=0.4\textwidth,
     height=0.4\textwidth
   ]
   \addplot[red, mark=x, mark size=0pt, samples=100, domain=5000:6000] 
-    {(147.98418346440923 - 0.05395073297083886*x + 4.91741*10^(-6) * x^2)^0.5};
+    {(4.9174 * 10^(-6) * x^2 - 0.0540 * x + 147.984)};
   \addlegendentry{Unsicherheit der Energie}
 \end{axis}
 \end{tikzpicture}
-\captionof{figure}{Unsicherheit der Energie in Abhängigkeit der
-  Energie. Da die Kalibration mit Hilfe eines Alpha-Peaks vorgenommen wurde, ist
-die Unsicherheit im Bereich der Peaks am geringsten.}
+\captionof{figure}{}
 \end{figure}
+
+(4.9174 * 10^(-6) * x^2 - 0.0540 * x + 147.984)
 
 \color{black}
 
@@ -431,10 +422,10 @@ als wenn wir einfach 4 Gauß-Funktionen nach Augenmaß an die Messdaten gefittet
 \begin{center}
   \begin{tabular}{l|l|l|l}
     $E_{exp}$ in $keV$ & rel. Häufigkeit & $E_{lit}$ in keV & Literaturwert rel. Häufigkeit \\ \hline
-    $5393 \pm 2,02$    & 0,0181          & 5388,23          & 0,016                         \\
-    $5448 \pm 0,29$    & 0,170           & 5442,8           & 0,13                          \\
-    $5486 \pm 0,04$    & 0,803           & 5485,56          & 0,845                         \\
-    $5529 \pm 3,57$    & 0,0089          & 5511,47          & 0,0022                        \\
+    $5393 \pm 2.02$    & 0,0181          & 5388,23          & 0,016                         \\
+    $5448 \pm 0.29$    & 0,170           & 5442,8           & 0,13                          \\
+    $5486 \pm 0.04$    & 0,803           & 5485,56          & 0,845                         \\
+    $5529 \pm 3.57$    & 0,0089          & 5511,47          & 0,0022                        \\
   \end{tabular}
 \end{center}
 
@@ -498,7 +489,7 @@ keV$. Für den Fano-Faktor errechnen wir $\Delta E_F = 4,04 keV$. Zuletzt ergibt
 sich für die Gesamtbreite des Peaks aus dem Gauß-Fit $Delta E = 23,19 keV$.
 
 Somit erhalten wir für den Beitrag der endlichen Dicke der Probe zur
-Signalbreite einen Wert von $E_d=16,94 keV$. Die räumliche Ausdehnung der Probe
+Signalbreite einen Wert von $E_d=16.94 keV$. Die räumliche Ausdehnung der Probe
 und das Rauschen der Messelektronik liefern also in etwa gleiche Beiträge zur
 Halbwertsbreite der 5,486 MeV-Linie
 
@@ -545,7 +536,7 @@ Zur Bestimmung des Energieverlustes der $\alpha$ Strahlung in der Luft, fitten
 wir Gauß-Funktionen an alle aufgenommenen Peaks. Anhand dieser lässt sich dann
 die Energiedifferenz zweier Peaks bestimmen. Zusammen mit dem Wissen, dass die
 Peaks im Abstand vom 5 mm aufgenommen wurden, kann man aus diesen Werten den
-Energieverlust der $\alpha$-Teilchen \textcolor{blue}{pro 5 mm} errechnen. Der Energieverlust
+Energieverlust der $\alpha$-Teilchen pro mm errechnen. Der Energieverlust
 errechnet sich zu $\frac{E_2-E_1}{\Delta s}$ mit den Energien $E_1$ und $E_2$
 zweier aufeinander folgender Peaks und dem Abstand $\Delta s=5mm$. Die Energie,
 für welche dieser Wert gilt, ergibt sich aus dem Mittelpunkt zwischen den beiden
@@ -674,8 +665,6 @@ gemessener Energieverlust deutlich über dem erwarteten lag.
 \newpage
 \begin{thebibliography}{100}
   \bibitem{anleitung} Versuchsanleitung zum Versuch Alpha-Spektroskopie, heruntergeladen am 28.06.2015 von der Homepage der TU Darmstadt
-  \bibitem{website}
-  \url{http://137.193.65.93/ger/theory.htm}, heruntergeladen am 05.08.2015.
   \bibitem{Fehler} Statistics: A Guide to the Use of Statistical Methods in the
     Physical Sciences von Roger J. Barlow, Seite 60
 \end{thebibliography}
