@@ -11,6 +11,7 @@
 % Wichtiges Paket für Links und verlinktes Inhaltsverzeichnis
 \usepackage{hhline}
 \usepackage[ngerman]{hyperref}
+\usepackage{xcolor}
 % Paket für Fußnoten
 \usepackage[stable]{footmisc}
 % Paket für amsmath (aligned mathe formeln)
@@ -214,7 +215,7 @@ Zuletzt muss die Apparatur belüftet werden, um den Energieverlust der $\alpha$-
 Wie oben erwähnt, wird die prominente Linie (bei 5,486 MeV) des
 $\alpha$-Spektrums als bekannt vorausgesetzt und die Amplitude es Pulsgenerators
 auf diese Energie eingestellt. Die anderen Kalibrationspunkte werden bei
-Abschwächung um den Faktor 2 und 5 aufgenommen. Im ersten Schritt werden nun die
+Abschwächung um den Faktor \textcolor{blue}{2, 5 und 10} aufgenommen. Im ersten Schritt werden nun die
 Messereignisse des Pulsers über den Kanalnummern aufgetragen und gefittet. Die
 Breite der Pulserlinien ist daher von Belang, da sie den Anteil des
 elektronischen Rauschens anzeigt. Dadurch, dass die Energie von 5,486 MeV
@@ -224,11 +225,6 @@ $\frac{1}{10}$ der Amplitude der Fehler sinnvollerweise bezogen auf
 $\frac{9}{10}$ des Wertes berechnet wird, ist es natürlich, dass der Fehler für
 kleinere Energien zunimmt und für die Referenzlinie an der Position des $\alpha$-Peaks am kleinsten ist, wie im Graphen zu sehen ist. 
 
-
-% Die Korrelation ist praktisch nicht vorhanden, denke der Meinte eine
-% Korrelation mit anderen Werten. Eventuell mit der Einstellung auf einen
-% gewissen Kanal? Weiß aber nicht genau, wo ich dann die Korrelationsmatrix
-% herbekommen soll.
 
 % Zudem sind Steigung und Achsenabschnitt korreliert, wodurch keine Gaußsche Fehlerfortpflanzung angewendet werden kann; der Fehler ergibt sich vielmehr mit der Korrelationsmatrix C zu:
 % $$\Delta E^2 = \sum_{ij} \frac{\partial E}{\partial x_i} \frac{\partial E}{\partial x_j} \Delta x_i \Delta x_j C_{ij}$$
@@ -300,22 +296,75 @@ abgeschätzte Fehler von 5\% der Energiedifferenz zum Ausgangspuls liegt weit ü
 dem beobachteten Wert.}
 \end{figure}
 
+\color{blue}
+Zur Bestimmung der Unischerheit der Energie $\Delta E(x)$ verwenden wir nicht
+das häufig benutzte Verfahren der gaußschen Fehlerfortpflanzung für
+unkorrelierte größen, sondern benutzen den Ansatz für korrelierte Größen:
+$$V_y=J(x) \cdot V_x \cdot J^T(x)$$\cite{Fehler}
+mit der Jakobimatrix 
+$$J_{ij}(x) = \frac{\partial y_i}{\partial x_j}(x) = \begin{pmatrix} x & 1 \\ 0 &
+  0 \end{pmatrix}$$
+und der Kovarianzmatrix
+$$V_x=\begin{pmatrix} 
+1,37819 \cdot 10^{-4} & -0,1335 \\
+ -0,133503 & 129,328
+\end{pmatrix}$$
+Bei benutzung der für diese Messung relevanten Werte verschwinden alle Elemente
+aus $V_y$ mit Ausnahme des Elements 1,1 und die gesuchte Unsicherheit ergibt
+sich nach Einsetzen der Umkehrfunktion von $E(x)$ zu $$\Delta E(E)=\sqrt{4,9174 \cdot 10^{-6} x^2 - 0,0540x + 147,984}$$
+
+
+\color{black}
+
 \subsection{Fit-Parameter}
 Die Pulse vom Pulsgeber wurden mit einem Gauß-Fit der Form 
 $$f(x)=\frac{k e^{-\frac{(x-\mu )^2}{2 \sigma ^2}}}{\sqrt{2 \pi } \sigma }$$
 angefittet, wobei wir folgende Parameter erhalten haben:
 
-\begin{figure}[H]
-\centering
-    \includegraphics[scale=1]{img/kalibr-gauss-fits-parameter.png}
-\end{figure}
+\color{blue}
+\begin{center}
+  \begin{tabular}{r|ll}
+               & Wert              & Ungenauigkeit     \\ \hline
+    $\mu_1$    & $33,68$           & $0,129$           \\ 
+    $\sigma_1$ & $1,303$           & $0,129$           \\ 
+    $k_1$      & $2,291\cdot 10^4$ & $1,956\cdot 10^3$ \\ 
+  \end{tabular}%
+  \quad
+  \begin{tabular}{r|ll}
+               & Wert              & Ungenauigkeit     \\ \hline
+    $\mu_2$    & $138,3$           & $0,113$           \\ 
+    $\sigma_2$ & $1,274$           & $0,113$           \\ 
+    $k_2$      & $2,456\cdot 10^4$ & $1,898\cdot 10^3$ \\ 
+  \end{tabular}%
+\end{center}
+
+\begin{center}
+  \begin{tabular}{r|ll}
+               & Wert              & Ungenauigkeit       \\ \hline
+    $\mu_3$    & $452,9$           & $0.130$             \\ 
+    $\sigma_3$ & $1,270$           & $0.130$             \\ 
+    $k_3$      & $2,197\cdot 10^4$ & $1,941\cdot 10^3$   \\ 
+  \end{tabular}%
+  \quad
+  \begin{tabular}{r|ll}
+               & Wert              & Ungenauigkeit       \\ \hline
+    $\mu_4$    & $968,7$           & $4,96\cdot 10^{-2}$ \\ 
+    $\sigma_4$ & $1,065$           & $4,96\cdot 10^{-2}$ \\ 
+    $k_4$      & $3,485\cdot 10^4$ & $1,404\cdot 10^3$   \\ 
+  \end{tabular}%
+\end{center}
+\color{black}
 
 Die Fitparamter für die Gerade der form $f(x)=a \cdot x + b$ lauten:
-\begin{figure}[H]
-\centering
-    \includegraphics[scale=1]{img/kalibr-gerade-fit-parameter}
-\end{figure}
-
+\color{blue}
+\begin{center}
+  \begin{tabular}{r|ll}
+        & Wert    & Ungenauigkeit \\ \hline
+    $a$ & $5,294$ & $0,0012$      \\ 
+    $b$ & $357,4$ & $11,37$       \\ 
+  \end{tabular}%
+\end{center}
+\color{black}
 
 
 
@@ -593,7 +642,8 @@ gemessener Energieverlust deutlich über dem erwarteten lag.
 \newpage
 \begin{thebibliography}{100}
   \bibitem{anleitung} Versuchsanleitung zum Versuch Alpha-Spektroskopie, heruntergeladen am 28.06.2015 von der Homepage der TU Darmstadt
-  
+  \bibitem{Fehler} Statistics: A Guide to the Use of Statistical Methods in the
+    Physical Sciences von Roger J. Barlow, Seite 60
 \end{thebibliography}
 \end{document}
 
