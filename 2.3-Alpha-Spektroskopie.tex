@@ -427,16 +427,17 @@ als wenn wir einfach 4 Gauß-Funktionen nach Augenmaß an die Messdaten gefittet
   \label{fig:Bild1}
 \end{figure}
 
-
+\color{blue}
 \begin{center}
   \begin{tabular}{l|l|l|l}
-    $E_{exp}$ in $keV$ & rel. Häufigkeit & $E_{lit}$ in keV & Literaturwert rel. Häufigkeit \\ \hline
-    $5393 \pm 2,02$    & 0,0181          & 5388,23          & 0,016                         \\
-    $5448 \pm 0,29$    & 0,170           & 5442,8           & 0,13                          \\
-    $5486 \pm 0,04$    & 0,803           & 5485,56          & 0,845                         \\
-    $5529 \pm 3,57$    & 0,0089          & 5511,47          & 0,0022                        \\
+    $E_{exp}$ in $keV$ & rel. Häufigkeit    & $E_{lit}$ in keV & Literaturwert rel. Häufigkeit \\ \hline
+    $5393 \pm 2,02$    & $0,018 \pm 0,0026$ & 5388,23          & 0,016                         \\
+    $5448 \pm 0,29$    & $0,170 \pm 0,0056$ & 5442,8           & 0,13                          \\
+    $5486 \pm 0,04$    & $0,803 \pm 0,0210$ & 5485,56          & 0,845                         \\
+    $5529 \pm 3,57$    & $0,009 \pm 0,0025$ & 5511,47          & 0,0022                        \\
   \end{tabular}
 \end{center}
+\color{black}
 
 Die gute Übereinstimmung des Hauptpeaks mit den Literaturwerten ist dadurch zu
 erklären, dass wir diesen zur Kalibration unserer Energieskala verwendet
@@ -470,15 +471,17 @@ Wir erhalten folgende Fit-Parameter:
 \subsection{Vergleich mit der Gamow-Theorie}
 Nach der Gamow-Theorie müsste der Transmissionskoeffizient die Abhängigkeit $T = e^G$ erfüllen, wie weiter oben beschrieben. Die relative Häufigkeit h, die von der Energie abhängt, ist proportional zu T. Der Gamow-Faktor unseres Experiments lässt sich aus dem Inversen der Energie berechnen:
 
+\text{blue}
 \begin{center}
   \begin{tabular}{|p{4cm}|p{5cm}|}
     \hline
     ln(h)  & G in 1/keV            \\ \hline
-    -4,012 & 1,8228$\cdot 10^{-4}$ \\ \hline
-    -1,772 & 1,8355$\cdot 10^{-4}$ \\ \hline
-    -0,219 & 1,8544$\cdot 10^{-4}$ \\ \hline
+    $-4,012 \pm 0,144$ & 1,8228$\cdot 10^{-4}$ \\ \hline
+    $-1,772 \pm 0,033$ & 1,8355$\cdot 10^{-4}$ \\ \hline
+    $-0,219 \pm 0,026$ & 1,8544$\cdot 10^{-4}$ \\ \hline
     \end{tabular}
 \end{center}
+\text{black}
 
 Trägt man nun den Logarithmus der relativen Häufigkeit h über dem experimentellen Gamow-Faktor auf, sollte sich also eine Gerade ergeben.
 
@@ -507,25 +510,27 @@ Halbwertsbreite der 5,486 MeV-Linie
 \begin{tikzpicture}
 \begin{axis}[
   default,
+  legend pos=north east,
   title={Vergleich der gemessenen Werte mit der Gamow-Theorie},
   xlabel=G in $10^{-4} ~keV^{-1}$,
   ylabel=ln(h),
-  xmin=1.82,
-  xmax=1.86,
+  xmin=1.805,
+  xmax=1.856,
   ymin=-5,
   ymax=1,
   height=0.5\linewidth
 ]
 \addplot[
-  black, only marks, mark=+, mark size=1pt %, error bars/.cd, y dir=both, y explicit, x dir=both, x fixed relative=0.005
+  black, only marks, mark=+, mark size=1pt, error bars/.cd, y dir=both, y explicit
 ] plot coordinates {
-    (1.8228,-4.012)
-    (1.8355,-1.772)
-    (1.8544,-0.219)
+    (1.8087,-4.711) +- (0, 0.278)
+    (1.8228,-0.219) +- (0, 0.026) 
+    (1.8355,-1.772) +- (0, 0.033)
+    (1.8544,-4.017) +- (0, 0.144)
 }; 
 \addlegendentry{Experimentelle Werte}
-\addplot[red, mark=x, mark size=0pt, samples=5, domain=1.82:1.86]
-  {-148.78958843635712 + 79.75346478832577*x};
+\addplot[red, mark=x, mark size=0pt, samples=5, domain=1.805:1.86]
+  {218.66261684760573 - 120.08468286987184*x};
 \addlegendentry{Fit-Gerade}
 \end{axis}
 \end{tikzpicture}
