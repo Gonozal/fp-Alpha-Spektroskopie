@@ -313,29 +313,29 @@ Bei benutzung der für diese Messung relevanten Werte verschwinden alle Elemente
 aus $V_y$ mit Ausnahme des Elements 1,1 und die gesuchte Unsicherheit ergibt
 sich nach Einsetzen der Umkehrfunktion von $E(x)$ zu $$\Delta E(E)=\sqrt{4,9174 \cdot 10^{-6} x^2 - 0,0540x + 147,984}$$
 
-\begin{figure}[H]
+\begin{figure}
 \begin{tikzpicture}
 \begin{axis}[
     default,
     title={Unsicherheit der Energie im Bereich der Alpha-Peaks},
-    xlabel=Energie in $keV$,
-    ylabel=Energieunischerheit in $keV$,
+    xlabel=Kanal,
+    ylabel=Energie in $keV$,
     xmin=5000,
     xmax=6000,
-    ymin=0,
+    ymin=-0.1,
     ymax=1.5,
-    width=0.8\textwidth,
+    width=0.4\textwidth,
     height=0.4\textwidth
   ]
   \addplot[red, mark=x, mark size=0pt, samples=100, domain=5000:6000] 
-    {(147.98418346440923 - 0.05395073297083886*x + 4.91741*10^(-6) * x^2)^0.5};
+    {(4.9174 * 10^(-6) * x^2 - 0.0540 * x + 147.984)};
   \addlegendentry{Unsicherheit der Energie}
 \end{axis}
 \end{tikzpicture}
-\captionof{figure}{Unsicherheit der Energie in Abhängigkeit der
-  Energie. Da die Kalibration mit Hilfe eines Alpha-Peaks vorgenommen wurde, ist
-die Unsicherheit im Bereich der Peaks am geringsten.}
+\captionof{figure}{}
 \end{figure}
+
+(4.9174 * 10^(-6) * x^2 - 0.0540 * x + 147.984)
 
 \color{black}
 
@@ -422,10 +422,10 @@ als wenn wir einfach 4 Gauß-Funktionen nach Augenmaß an die Messdaten gefittet
 \begin{center}
   \begin{tabular}{l|l|l|l}
     $E_{exp}$ in $keV$ & rel. Häufigkeit & $E_{lit}$ in keV & Literaturwert rel. Häufigkeit \\ \hline
-    $5393 \pm 2,02$    & 0,0181          & 5388,23          & 0,016                         \\
-    $5448 \pm 0,29$    & 0,170           & 5442,8           & 0,13                          \\
-    $5486 \pm 0,04$    & 0,803           & 5485,56          & 0,845                         \\
-    $5529 \pm 3,57$    & 0,0089          & 5511,47          & 0,0022                        \\
+    $5393 \pm 2.02$    & 0,0181          & 5388,23          & 0,016                         \\
+    $5448 \pm 0.29$    & 0,170           & 5442,8           & 0,13                          \\
+    $5486 \pm 0.04$    & 0,803           & 5485,56          & 0,845                         \\
+    $5529 \pm 3.57$    & 0,0089          & 5511,47          & 0,0022                        \\
   \end{tabular}
 \end{center}
 
@@ -489,7 +489,7 @@ keV$. Für den Fano-Faktor errechnen wir $\Delta E_F = 4,04 keV$. Zuletzt ergibt
 sich für die Gesamtbreite des Peaks aus dem Gauß-Fit $Delta E = 23,19 keV$.
 
 Somit erhalten wir für den Beitrag der endlichen Dicke der Probe zur
-Signalbreite einen Wert von $E_d=16,94 keV$. Die räumliche Ausdehnung der Probe
+Signalbreite einen Wert von $E_d=16.94 keV$. Die räumliche Ausdehnung der Probe
 und das Rauschen der Messelektronik liefern also in etwa gleiche Beiträge zur
 Halbwertsbreite der 5,486 MeV-Linie
 
@@ -536,7 +536,7 @@ Zur Bestimmung des Energieverlustes der $\alpha$ Strahlung in der Luft, fitten
 wir Gauß-Funktionen an alle aufgenommenen Peaks. Anhand dieser lässt sich dann
 die Energiedifferenz zweier Peaks bestimmen. Zusammen mit dem Wissen, dass die
 Peaks im Abstand vom 5 mm aufgenommen wurden, kann man aus diesen Werten den
-Energieverlust der $\alpha$-Teilchen \textcolor{blue}{pro 5 mm} errechnen. Der Energieverlust
+Energieverlust der $\alpha$-Teilchen pro mm errechnen. Der Energieverlust
 errechnet sich zu $\frac{E_2-E_1}{\Delta s}$ mit den Energien $E_1$ und $E_2$
 zweier aufeinander folgender Peaks und dem Abstand $\Delta s=5mm$. Die Energie,
 für welche dieser Wert gilt, ergibt sich aus dem Mittelpunkt zwischen den beiden
