@@ -131,38 +131,31 @@
 %ANFANG INHALT
 
 \chapter{Einleitung}
-
+\color{blue}
 In diesem Versuch geht es um das Phänomen $\alpha$-Zerfall, genauer um die Vermessung des $\alpha$-Spektrums von $^{241}Am$ (Americium), um nach einer Energiekalibration das Spektrum mit den Literaturwerten (s.u.) vergleichen zu können. Dabei werden typische Geräte kernphysikalischer Messapparaturen vorgestellt sowie die Kopplung von Experiment und Rechner zur Auswertung verwendet. Ein Problem der $\alpha$-Spektroskopie ist dabei die geringe Reichweite bzw. die starke Abschwächung der Strahlung, wenn diese mit Materie wechselwirkt. Um dies zu verstehen, wollen wir weiterhin den Energieverlust der $\alpha$-Strahlung in Luft messen. Die Theorie hierfür wird durch die sog. Bethe-Bloch-Gleichung (s.u.) beschrieben, anhand derer wir unsere Ergebnisse dann einordnen können.
+\color{black}
 
 \chapter{Grundlagen}
 
 \section{$\alpha$-Zerfall}
 
 Alphazerfall ist eine Art des radioaktiven Zerfalls von Atomkernen. Der zerfallende Atomkern sendet einen Helium-4-Atomkern aus (Alphateilchen), wodurch die Massezahl des Mutterkerns um vier Einheiten und die Kernladungszahl um zwei Einheiten abnimmt. Beim Zerfall wird kinetische Energie frei, welche sich im umgekehrten Verhältnis der beiden Massen verteilt. Das Alphateilchen erfährt die attraktive starke Wechselwirkung, die eine kurze Reichweite besitzt, sowie Repulsion durch das Coulombpotential. Zusätzlich muss die Auswirkung des Kerndrehimpulses berücksichtigt werden. Durch den Zerfall wird die Energie des Teilchen in den quasigebundenen Bereich E > 0 angehoben, wodurch es mittels des quantenmechanischen Tunneleffektes das Coloumbpotential durchdringen kann. Mit Drehimpulskorrektur ergibt sich der folgende Hamiltonoperator: 
+
+\color{blue}
+
 $$\hat{H} = \frac{-\hbar^2 \nabla^2}{2 m_{\alpha}} - V_C(r) - \frac{l(l+1) \hbar^2}{2 M r^2},$$
 wobei $m_{\alpha}$ die Masse des Alphateilchens ist, folglich der erste Term die kinetische Energie repräsentiert, $V_C(r)$ das Coulombpotential ist und der letzte Term mit der Masse M des Mutterkerns die Drehimpulskorrektur darstellt.
+
+\color{black}
+
 Der Transmissionskoeffizient ergibt sich als Quotient der transmittierten und der einlaufenden Betragsquadrate der Wellenfunktionen: $T = \frac{|\psi_t|^2}{|\psi_e|^2}$, was sich mit der Lösung der Schrödingergleichung schreiben lässt als $T \approx e^G$, wobei der sogenannte Gamow-Faktor G gegeben ist durch:
 $$G = \frac{2 \sqrt{2 m}}{\hbar}\int_R^{R'} \sqrt{\frac{Z_1Z_2e^2}{r}-E} dr.$$
 
-Alphastrahlung ist zur Spektroskopie insofern geeignet, als dass jedes Isotop Linien charakteristischer Energie und Intensität besitzt. Bei dem hier verwendeten Americium $^{241}Am$, welches ein reiner Alphastrahler ist, treten fünf verschiedene Linien auf, welche im Folgenden aufgelistet sind: 
-
-\begin{center}
-  \begin{tabular}{|p{5cm}|p{5cm}|}
-    \hline
-    E in keV & Intensität \\ \hline
-    5388,23  & 0,016      \\ \hline
-    5442,8   & 0,13       \\ \hline
-    5485,56  & 0,845      \\ \hline
-    5511,47  & 0,0022     \\ \hline
-    5544,5   & 0,0034     \\ \hline
-        \end{tabular}
-\end{center}
-
-Die mittlere Lebensdauer des Isotops beträgt knapp 433 Jahre. Diese Daten lassen sich auch aus dem Zerfallsschema des Isotops ablesen (hier inkl. der Gammastrahlung des Tochternuklids Neptunium $^{237}$Np):
+Alphastrahlung ist zur Spektroskopie insofern geeignet, als dass jedes Isotop Linien charakteristischer Energie und Intensität besitzt. Bei dem hier verwendeten Americium $^{241}Am$, welches ein reiner Alphastrahler ist, treten fünf verschiedene Linien auf. \textcolor{blue}{Die mittlere Lebensdauer des Isotops beträgt knapp 433 Jahre. Diese Daten lassen sich auch aus dem Zerfallsschema des Isotops ablesen (hier inkl. der Gammastrahlung des Tochternuklids Neptunium $^{237}$Np):}
 
 \begin{figure}[H] 
   \centering
-     \includegraphics[width=0.65\textwidth]{img/schema.jpg}
+     \includegraphics[width=0.65\textwidth]{img/schema.png}
   \caption{Zerfallsschema von $^{241}$Am mit $\gamma$-Strahlung aus dem Tochterkern $^{237}$Np. \cite{website}}
   \label{fig:Bild1}
 \end{figure}
@@ -180,10 +173,11 @@ wobei diese jedoch nur gültig ist, wenn das Teilchen noch mindestens so schnell
 Der Verlauf des Energieverlustes von Alphateilchen in Luft ist durch die Bragg-Kurve gegeben und zeigt gegen Ende, d.h. kurz vor Stillstand der Teilchen, einen deutlichen Peak.
 
 \section{Halbleiterdetektor}
-
+\color{blue}
 Um den Halbzeiterzähler zu erklären, ist es sinnvoll, sich einige grundlegende Eigenschaften von Halbleitern in Erinnerung zu rufen. Wir betrachten das Bändermodell, da durch Superposition der Atomorbitale die erlaubten Energieniveaus jeweils leicht nach oben und unten wandern und somit zu Energiebändern verschmieren bzw. die Lösung der Schrödingergleichung für ein einzelnes Elektron durch das Feld der Ionenrümpfe aufweicht. Bei Halbleitern sind Valenz- und Leitungsband durch eine schmale Bandlücke von einigen eV voneinander getrennt und dazwischen befindet sich die Fermi-Energie. Beispielsweise durch thermische Energiezufuhr oder Absorption eines Photons kann ein Elektron die Bandlücke überwinden und ins Leitungsband gelangen, was zu einem Defektelektron oder Loch im Valenzband führt. Sowohl Löcher als auch Elektronen sind bewegliche Ladungsträger und sind für die elektrische Leitfähigkeit  verantwortlich. Die intrinsische Leitfähigkeit des Halbleiters ohne Dotierung wird als Eigenleitfähigkeit bezeichnet. Sie nimmt mit der Temperatur zu. 
 
 Etwa in der Mitte der Bandlücke liegt beim Halbleiter die sog. Fermi-Energie, was sich aus der Fermi-Dirac-Statistik ergibt. Die Fermi-Energie beschreibt dabei diejenige Energie, bei der ein Elektronenzustand mit Wahrscheinlichkeit 0,5 besetzt ist (angenommen dort existiere ein Elektronenzustand). Durch Dotierung kann die Fermi-Energie im Halbleiter verschoben werden. Dabei wird der Halbleiter gezielt mit Elementen aus der dritten oder fünften Hauptgruppe verunreinigt. Aus der dritten Hauptgruppe entstammen Elektronenakzeptoren, d.h. oberhalb des Valenzbandes wird ein zusätzliches Energieband hinzugefügt, welches Elektronen aufnimmt. Das resultiert in positiver oder p-Dotierung, d.h. es überwiegt die Löcherleitung. Elemente aus der fünften Hauptgruppe dienen als Donatoren, d.h. knapp unterhalb des Leitungsbandes wird ein Elektronenspender hinzufügt und es überwiegt die Elektronenleitung (negative oder n-Dotierung). Bei beiden Dotierungsarten bleibt der Halbleiter allerdings nach außen elektrisch neutral.
+\color{black}
 
 Wenn nun ein p- und ein n-dotierter Halbleiter in Kontakt gebracht werden, bildet sich eine sogenannte Raumladungs- oder Verarmungszone aus. Zunächst diffundieren die freien Ladungsträger in das jeweils andere Halbleitermaterial und rekombinieren an der Grenzschicht. Dadurch bleiben Ionenrümpfe zurück, die im p-dotierten Halbleiter negativ geladen sind und positiv im n-dotierten. D.h. hierbei entsteht ein elektrisches Feld, welches der Diffusion entgegenwirkt und schließlich zum Gleichgewicht führt, wobei sich die Fermi-Energien der beiden Halbleiter angeglichen haben. Dies wird als Raumladungszone bezeichnet. Wird nun eine Spannung derart angelegt, dass der Minuspol am p-dotierten Halbleiter und der Pluspol am n-dotierten Halbleiter anliegen, vergrößert sich dieses elektrische Feld bzw. die Raumladungszone noch und es fließt nahezu kein Strom. In Durchlassrichtung (d.h. Minuspol an n-dotiertem und Pluspol an p-dotiertem Halbleiter) verkleinert sich die Raumladungszone und es fließt ein wesentlich größerer Strom.
 
@@ -192,7 +186,7 @@ Wir verwenden einen Oberflächensperrschichtdetektor, genauer einen p-n-Zähler 
 In unserm Fall besteht der Halbleiterzähler aus Silizium, d.h. der Energieaufwand w zur Bildung eines Elektron-Loch-Paares beträgt 3,6 eV und ist somit deutlich höher als die Bandlücke (etwa 1 eV). Die Anzahl der gebildeten Paare ist dann gegeben durch $N = \frac{E}{w}$, die Schwankung beträgt $\Delta N = \sqrt{N F}$ mit dem sogenannten Fano-Faktor F, der das Verhältnis der realen Varianz mit der Varianz der Poisson-Verteilung angibt. Für die Poisson-Verteilung gilt, dass Erwartungswert und Varianz gleich sind. Für Silizium ist $F = 0,15$. Die Halbwertsbreite der Energie ist dann: $E_{FWHM} = 2,355 w \sqrt{N F} = 2,355 \sqrt{E w F}$.
 Der Impulsanstieg ist eine Funktion, der von Energie, Richtung und Masse des einfallenden Teilchens sowie auch der Detektorbauart abhängt. Dies ist recht kompliziert, es lässt sich jedenfalls feststellen, dass die Impulsanstiegszeit für Oberflächensperrschichtdetektoren im Bereich von Nanosekunden liegt. Die Sammelzeit ist von den Ladungsträgerkonzentrationen im Halbleiter sowie von deren Beweglichkeit abhängig. Sie beträgt ebenfalls wenige Nanosekunden.
 
-Da das Signal, welches der Detektor liefert, sehr schwach ist, muss es direkt hinter dem Detektor verstärkt werden, wofür wir einen Vorverstärker benutzen, der eine hohe Ladungssensitivität aufweist. Hierbei wird der Strom verstärkt und kann als Eingangssignal für den Spektroskopieverstärker genutzt werden, wo auch die Pulsformung erfolgt. Anschließend kann das Signal analog-digital konvertiert und auf dem Computer gespeichert werden. 
+Da das Signal, welches der Detektor liefert, sehr schwach ist, muss es direkt hinter dem Detektor verstärkt werden, wofür wir einen Vorverstärker benutzen, der eine hohe Ladungssensitivität aufweist. Hierbei wird der Strom verstärkt und kann als Eingangssignal für den Spektroskopieverstärker genutzt werden, wo auch die Pulsformung erfolgt. Anschließend kann das Signal analog-digital konvertiert und auf dem Computer gespeichert werden. \cite{Halbleitert}
 
 \chapter{Aufbau und Durchführung}
 
@@ -403,7 +397,9 @@ Die Fitparamter für die Gerade der form $f(x)=a \cdot x + b$ lauten:
 \section{Energie- und Intensitätsverteilung der $\alpha$-Linien}
 
 Im Folgenden betrachten wir das $\alpha$-Spektrum von $^{241}Am$
-inkl. Hintergrundstrahlung. 
+inkl. Hintergrundstrahlung. \textcolor{blue}{Die Hintergrundstrahlung wird durch Alpha-Strahlung
+verursacht, welche einen Teil ihrer Energie bereits außerhalb des Detektors
+deponiert haben.}
 
 Wir fitten zuerst eine e-Funktion an den Untergrund vor den $\alpha$-Peaks. Da
 dieser Untergrund zum größten Teil durch den Hauptpeak ausgelöst wird,
@@ -471,41 +467,21 @@ Wir erhalten folgende Fit-Parameter:
 \subsection{Vergleich mit der Gamow-Theorie}
 Nach der Gamow-Theorie müsste der Transmissionskoeffizient die Abhängigkeit $T = e^G$ erfüllen, wie weiter oben beschrieben. Die relative Häufigkeit h, die von der Energie abhängt, ist proportional zu T. Der Gamow-Faktor unseres Experiments lässt sich aus dem Inversen der Energie berechnen:
 
-\text{blue}
+\color{blue}
 \begin{center}
-  \begin{tabular}{|p{4cm}|p{5cm}|}
-    \hline
-    ln(h)  & G in 1/keV            \\ \hline
-    $-4,012 \pm 0,144$ & 1,8228$\cdot 10^{-4}$ \\ \hline
-    $-1,772 \pm 0,033$ & 1,8355$\cdot 10^{-4}$ \\ \hline
-    $-0,219 \pm 0,026$ & 1,8544$\cdot 10^{-4}$ \\ \hline
+  \begin{tabular}{p{4cm}p{5cm}}
+    ln(h)              & G in 1/keV            \\ \hline
+    $-4,711 \pm 0,278$ & 1,8087$\cdot 10^{-4}$ \\
+    $-4,012 \pm 0,144$ & 1,8228$\cdot 10^{-4}$ \\
+    $-1,772 \pm 0,033$ & 1,8355$\cdot 10^{-4}$ \\
+    $-0,219 \pm 0,026$ & 1,8544$\cdot 10^{-4}$ \\
     \end{tabular}
 \end{center}
-\text{black}
+
+\color{black}
 
 Trägt man nun den Logarithmus der relativen Häufigkeit h über dem experimentellen Gamow-Faktor auf, sollte sich also eine Gerade ergeben.
 
-\section{Halbwertsbreite der 5,486MeV-Linie}
-Zur Betrachtung der Halbwertsbreite der beobachteten $\alpha$-Linie bei 5.486
-MeV, nehmen wir an, dass die beteiligten Faktoren unabhängig voneinander
-sind. Dabei handelt es sich um die Vebreiterung durch die endliche Dicke der
-verwendeten Quelle $\Delta E_d$, die Verbreiterung durch den Fano-Faktor $\Delta
-E_F$ und das Rauschen der Messelektronik $\Delta E_R$. Da wir eine
-unabhängigkeit der einzelnen beitragenden Komponenten zueinander angenommen haben, lässt
-sich die Pulsbreite des $\alpha$-Peaks schreiben als $\Delta E^2 = \Delta E_R^2
-+ \Delta E_F^2 + \Delta E_d^2$, was wir nach $\Delta E_d^2$ umstellen können.
-
-Das Rauschen der Messelektronik bestimmen wir an Hand der Linienbreite der
-aufgenommenen Pulse zur Kalibration der Energieskale und erhalten $\Delta E_R=15,31
-keV$. Für den Fano-Faktor errechnen wir $\Delta E_F = 4,04 keV$. Zuletzt ergibt
-sich für die Gesamtbreite des Peaks aus dem Gauß-Fit $Delta E = 23,19 keV$.
-
-Somit erhalten wir für den Beitrag der endlichen Dicke der Probe zur
-Signalbreite einen Wert von $E_d=16,94 keV$. Die räumliche Ausdehnung der Probe
-und das Rauschen der Messelektronik liefern also in etwa gleiche Beiträge zur
-Halbwertsbreite der 5,486 MeV-Linie
-
-\section{Energieverlust von $\alpha$-Strahlung in Luft}
 \begin{figure}[H]
 \begin{tikzpicture}
 \begin{axis}[
@@ -535,15 +511,33 @@ Halbwertsbreite der 5,486 MeV-Linie
 \end{axis}
 \end{tikzpicture}
     \caption{der Logarithmus der relativen Intensität der einzelnen Peaks
-      aufgetragen über den Gamow-Faktor.}
+      aufgetragen über den Gamow-Faktor. Für die Fitgerade wurde der erste Wert
+      nicht berücksichtigt, da dieser offensichtlich nicht mit der Gamow-Theorie
+    übereinstimmt.}
 \end{figure}
 
-Leider konnten wir den erwarteten Zusammenhang zwischen der Gamow-Theorie und
-den gemessenen Werten nicht herstellen. Dies liegt vermutlich daran, dass die
-relative Intensität für den Hauptpeak des verwendeten Americiums bei uns mit
-80\% sehr gering ausfiel. Hier wäre ein um 5\% höherer Wert zu erwartet
-gewesen.
+Mit Ausnahme des Peaks bei 5,529MeV liegen die beobachteten Alpha-Peaks in
+Übereinstimmung mit der Gamow-Theorie sehr gut auf einer Geraden. 
 
+\section{Halbwertsbreite der 5,486MeV-Linie}
+Zur Betrachtung der Halbwertsbreite der beobachteten $\alpha$-Linie bei 5.486
+MeV, nehmen wir an, dass die beteiligten Faktoren unabhängig voneinander
+sind. Dabei handelt es sich um die Vebreiterung durch die endliche Dicke der
+verwendeten Quelle $\Delta E_d$, die Verbreiterung durch den Fano-Faktor $\Delta
+E_F$ und das Rauschen der Messelektronik $\Delta E_R$. Da wir eine
+unabhängigkeit der einzelnen beitragenden Komponenten zueinander angenommen haben, lässt
+sich die Pulsbreite des $\alpha$-Peaks schreiben als $\Delta E^2 = \Delta E_R^2
++ \Delta E_F^2 + \Delta E_d^2$, was wir nach $\Delta E_d^2$ umstellen können.
+
+Das Rauschen der Messelektronik bestimmen wir an Hand der Linienbreite der
+aufgenommenen Pulse zur Kalibration der Energieskale und erhalten $\Delta E_R=15,31
+keV$. Für den Fano-Faktor errechnen wir $\Delta E_F = 4,04 keV$. Zuletzt ergibt
+sich für die Gesamtbreite des Peaks aus dem Gauß-Fit $Delta E = 23,19 keV$.
+
+Somit erhalten wir für den Beitrag der endlichen Dicke der Probe zur
+Signalbreite einen Wert von $E_d=16,94 keV$. Die räumliche Ausdehnung der Probe
+und das Rauschen der Messelektronik liefern also in etwa gleiche Beiträge zur
+Halbwertsbreite der 5,486 MeV-Linie
 
 \section{Energieverlust von $\alpha$-Strahlung in Luft}
 Zur Bestimmung des Energieverlustes der $\alpha$ Strahlung in der Luft, fitten
@@ -560,14 +554,14 @@ betrachteten Peaks $E_1+\frac{E_2-E1}{2}$.
 \begin{axis}[
   default,
   title={Energie der $\alpha$-Teilchen nach Abschwächung in Luft},
-  xlabel=Kanal,
-  ylabel=E in MeV,
+  xlabel=$E$ in $MeV$,
+  ylabel=counts,
   xmin=0.4,
   xmax=4.6,
   ymin=0,
   ymax=600,
   width=0.8\textwidth,
-  height=0.4\linewidth
+  height=0.3\linewidth
 ]
 \addplot[
   red, only marks, mark=+, mark size=1pt
@@ -594,6 +588,7 @@ betrachteten Peaks $E_1+\frac{E_2-E1}{2}$.
 \end{figure}
 
 
+\color{blue}
 \begin{figure}[H]
 \begin{tikzpicture}
 \begin{axis}[
@@ -607,12 +602,12 @@ betrachteten Peaks $E_1+\frac{E_2-E1}{2}$.
   ymin=0,
   ymax=220,
   width=0.8\textwidth,
-  height=0.4\linewidth
+  height=0.33\linewidth
 ]
 \addplot[
-  black, only marks, mark=+, mark size=1pt
-%, error bars/.cd, y dir=both, y explicit, x dir=both, x fixed relative=0.005
-] table[x index=0, y index=1] {data/AIR-dEdS.DAT};
+  black, only marks, mark=+, mark size=1pt,
+  error bars/.cd, y dir=both, y explicit, x dir=both, x explicit
+] table[x index=0, y index=1, x error index=2, y error index=3] {data/AIR-dEdS.DAT};
 \addlegendentry{Messpunkte}
 \addplot[red, mark=x, mark size=0pt, samples=200, domain=0:5]
   {(74.0011121*ln(6.3219688*x)/x};
@@ -626,6 +621,7 @@ betrachteten Peaks $E_1+\frac{E_2-E1}{2}$.
     der Messergebnisse gut mit der Theorie überein, jedoch liegt bei uns die
     Abschwächung um einen konstanten Faktor über dem erwarteten Wert.}
 \end{figure}
+\color{black}
 
 Zur Überprüfung der Theorie wird die Bethe-Bloch-Gleichung herangezogen, die weiter oben schon eingeführt wurde (hier in einer Form in Abhängig der kinetischen Energie, die für unsere Zwecke dienlicher ist): 
 
@@ -683,6 +679,7 @@ gemessener Energieverlust deutlich über dem erwarteten lag.
   \url{http://137.193.65.93/ger/theory.htm}, heruntergeladen am 05.08.2015.
   \bibitem{Fehler} Statistics: A Guide to the Use of Statistical Methods in the
     Physical Sciences von Roger J. Barlow, Seite 60
+  \bibitem{Halbleiter} Halbleiterdetektoren - Seminarvortrag von Stefanie Wanka \url{http://wwwa1.kph.uni-mainz.de/Vorlesungen/WS08/FP-Seminar/handouts/KP06_Wanka.pdf}
 \end{thebibliography}
 \end{document}
 
