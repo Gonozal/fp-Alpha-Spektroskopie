@@ -179,14 +179,23 @@ Um den Halbzeiterzähler zu erklären, ist es sinnvoll, sich einige grundlegende
 Etwa in der Mitte der Bandlücke liegt beim Halbleiter die sog. Fermi-Energie, was sich aus der Fermi-Dirac-Statistik ergibt. Die Fermi-Energie beschreibt dabei diejenige Energie, bei der ein Elektronenzustand mit Wahrscheinlichkeit 0,5 besetzt ist (angenommen dort existiere ein Elektronenzustand). Durch Dotierung kann die Fermi-Energie im Halbleiter verschoben werden. Dabei wird der Halbleiter gezielt mit Elementen aus der dritten oder fünften Hauptgruppe verunreinigt. Aus der dritten Hauptgruppe entstammen Elektronenakzeptoren, d.h. oberhalb des Valenzbandes wird ein zusätzliches Energieband hinzugefügt, welches Elektronen aufnimmt. Das resultiert in positiver oder p-Dotierung, d.h. es überwiegt die Löcherleitung. Elemente aus der fünften Hauptgruppe dienen als Donatoren, d.h. knapp unterhalb des Leitungsbandes wird ein Elektronenspender hinzufügt und es überwiegt die Elektronenleitung (negative oder n-Dotierung). Bei beiden Dotierungsarten bleibt der Halbleiter allerdings nach außen elektrisch neutral.
 \color{black}
 
-Wenn nun ein p- und ein n-dotierter Halbleiter in Kontakt gebracht werden, bildet sich eine sogenannte Raumladungs- oder Verarmungszone aus. Zunächst diffundieren die freien Ladungsträger in das jeweils andere Halbleitermaterial und rekombinieren an der Grenzschicht. Dadurch bleiben Ionenrümpfe zurück, die im p-dotierten Halbleiter negativ geladen sind und positiv im n-dotierten. D.h. hierbei entsteht ein elektrisches Feld, welches der Diffusion entgegenwirkt und schließlich zum Gleichgewicht führt, wobei sich die Fermi-Energien der beiden Halbleiter angeglichen haben. Dies wird als Raumladungszone bezeichnet. Wird nun eine Spannung derart angelegt, dass der Minuspol am p-dotierten Halbleiter und der Pluspol am n-dotierten Halbleiter anliegen, vergrößert sich dieses elektrische Feld bzw. die Raumladungszone noch und es fließt nahezu kein Strom. In Durchlassrichtung (d.h. Minuspol an n-dotiertem und Pluspol an p-dotiertem Halbleiter) verkleinert sich die Raumladungszone und es fließt ein wesentlich größerer Strom.
+Wenn nun ein p- und ein n-dotierter Halbleiter in Kontakt gebracht werden, bildet sich eine sogenannte Raumladungs- oder Verarmungszone aus. Zunächst diffundieren die freien Ladungsträger in das jeweils andere Halbleitermaterial und rekombinieren an der Grenzschicht. Dadurch bleiben Ionenrümpfe zurück, die im p-dotierten Halbleiter negativ geladen sind und positiv im n-dotierten. D.h. hierbei entsteht ein elektrisches Feld, welches der Diffusion entgegenwirkt und zu einem dynamischen Gleichgewicht führt. Durch die Diffusion der Ladungsträger verschieben sich innerhalb eines gewissen Bereiches, der sogenannten Raumladungszone, Valenz- und Leitungsband, weil die Elektronen des n-dotierten Halbleiters im p-dotieren Halbleiter viele energetisch niedrigere Plätze vorfinden und für die Löcher des p-dotierten Teilstücks genau der umgekehrte Prozess stattfindet. In folgender Grafik wird dies anhand von Strompfeilen, die den Fluss der Ladungsträger anzeigen, verdeutlicht. Man sieht dort, dass innerhalb der Breite $d_{RLZ}$ der Raumladungszone eine Verbiegung des Valenz- und Leitungsbandes stattfindet:
+
+\begin{figure}[H] 
+  \centering
+     \includegraphics[width=0.5\textwidth]{img/pn.jpg}
+  \caption{Stromfluss im dynamischen Gleichgewicht der Raumladungszone mit Verschiebung des Valenz- und Leitungsbandes bei einem Halbleiter, dessen eines Teilstück n-dotiert und dessen anderes Teilstück p-dotiert ist. \cite{website1}}
+  \label{fig:Bild1}
+\end{figure}
+
+Wird nun eine Spannung derart angelegt, dass der Minuspol am p-dotierten Halbleiter und der Pluspol am n-dotierten Halbleiter anliegen, vergrößert sich dieses elektrische Feld bzw. die Raumladungszone noch und der Halbleiter lässt nahezu keinen externen Stromfluss zu. Durch den Halbleiterübergang fließt lediglich ein sehr kleiner Sperrstrom, welcher durch Minoritätsladungsträger erzeugt wird. Ab einer gewissen charakteristischen Spannung, der sog. Durchbruchspannung, kommt es zum Durchbruch und der Stromfluss steigt steil an. In Durchlassrichtung (d.h. Minuspol an n-dotiertem und Pluspol an p-dotiertem Halbleiter) verkleinert sich die Raumladungszone/Sperrschicht und ein externer Stromfluss ist möglich, weil ab einer gewissen angelegten Spannung das Feld der Sperrschicht neutralisiert wird und somit Ladungstransport durch den gesamten Kristall ermöglicht wird, wobei neue Ladungsträger von der äußeren Quelle zur Sperrschicht fließen und dort fortwährend rekombinieren.
 
 Wir verwenden einen Oberflächensperrschichtdetektor, genauer einen p-n-Zähler mit Oberflächensperrschicht, d.h. einen p-dotierten Halbleiter, auf den eine n-dotierte Schicht aufgedampft ist, bei dem die positiv geladenen Alphateilchen auf die sich an der Oberfläche befindlichen Raumladungszone treffen und Elektron-Loch-Paare bilden, deren Anzahl der Energie der Teilchen proportional ist. Zunächst betrachten wir Oberflächenzustände. Wir können die Oberfläche eines Halbleiters definieren als diejenige Schicht, die andere Bindungsverhältnisse und -symmetrien besitzt als das Innere des Halbleiters. Es handelt sich um eine Schicht der Dicke nur weniger Atomlagen, in der weitere Energieniveaus im Bereich der Bandlücke auftreten. Falls genug solcher Zustände vorhanden sind, liegt die Fermi-Energie in diesem Bereich und es existieren folglich weitere Niveaus dicht über der Fermi-Energie, die die freien Ladungsträger des Halbleitervolumens aufzufüllen versuchen. 
 
 In unserm Fall besteht der Halbleiterzähler aus Silizium, d.h. der Energieaufwand w zur Bildung eines Elektron-Loch-Paares beträgt 3,6 eV und ist somit deutlich höher als die Bandlücke (etwa 1 eV). Die Anzahl der gebildeten Paare ist dann gegeben durch $N = \frac{E}{w}$, die Schwankung beträgt $\Delta N = \sqrt{N F}$ mit dem sogenannten Fano-Faktor F, der das Verhältnis der realen Varianz mit der Varianz der Poisson-Verteilung angibt. Für die Poisson-Verteilung gilt, dass Erwartungswert und Varianz gleich sind. Für Silizium ist $F = 0,15$. Die Halbwertsbreite der Energie ist dann: $E_{FWHM} = 2,355 w \sqrt{N F} = 2,355 \sqrt{E w F}$.
 Der Impulsanstieg ist eine Funktion, der von Energie, Richtung und Masse des einfallenden Teilchens sowie auch der Detektorbauart abhängt. Dies ist recht kompliziert, es lässt sich jedenfalls feststellen, dass die Impulsanstiegszeit für Oberflächensperrschichtdetektoren im Bereich von Nanosekunden liegt. Die Sammelzeit ist von den Ladungsträgerkonzentrationen im Halbleiter sowie von deren Beweglichkeit abhängig. Sie beträgt ebenfalls wenige Nanosekunden.
 
-Da das Signal, welches der Detektor liefert, sehr schwach ist, muss es direkt hinter dem Detektor verstärkt werden, wofür wir einen Vorverstärker benutzen, der eine hohe Ladungssensitivität aufweist. Hierbei wird der Strom verstärkt und kann als Eingangssignal für den Spektroskopieverstärker genutzt werden, wo auch die Pulsformung erfolgt. Anschließend kann das Signal analog-digital konvertiert und auf dem Computer gespeichert werden. \cite{Halbleitert}
+Da das Signal, welches der Detektor liefert, sehr schwach ist, muss es direkt hinter dem Detektor verstärkt werden, wofür wir einen Vorverstärker benutzen, der eine hohe Ladungssensitivität aufweist. Hierbei wird der Strom verstärkt und kann als Eingangssignal für den Spektroskopieverstärker genutzt werden, wo auch die Pulsformung erfolgt. Anschließend kann das Signal analog-digital konvertiert und auf dem Computer gespeichert werden. \cite{Halbleiter}
 
 \chapter{Aufbau und Durchführung}
 
@@ -216,7 +225,7 @@ Zuletzt muss die Apparatur belüftet werden, um den Energieverlust der $\alpha$-
 \section{Kalibration der Energieskala}
 
 Wie oben erwähnt, wird die prominente Linie (bei 5,486 MeV) des
-$\alpha$-Spektrums als bekannt vorausgesetzt und die Amplitude es Pulsgenerators
+$\alpha$-Spektrums als bekannt vorausgesetzt und die Amplitude des Pulsgenerators
 auf diese Energie eingestellt. Die anderen Kalibrationspunkte werden bei
 Abschwächung um den Faktor \textcolor{blue}{2, 5 und 10} aufgenommen. Im ersten Schritt werden nun die
 Messereignisse des Pulsers über den Kanalnummern aufgetragen und gefittet. Die
@@ -300,9 +309,9 @@ dem beobachteten Wert.}
 \end{figure}
 
 \color{blue}
-Zur Bestimmung der Unischerheit der Energie $\Delta E(x)$ verwenden wir nicht
+Zur Bestimmung der Unsicherheit der Energie $\Delta E(x)$ verwenden wir nicht
 das häufig benutzte Verfahren der gaußschen Fehlerfortpflanzung für
-unkorrelierte größen, sondern benutzen den Ansatz für korrelierte Größen:
+unkorrelierte Größen, sondern benutzen den Ansatz für korrelierte Größen:
 $$V_y=J(x) \cdot V_x \cdot J^T(x)$$\cite{Fehler}
 mit der Jakobimatrix 
 $$J_{ij}(x) = \frac{\partial y_i}{\partial x_j}(x) = \begin{pmatrix} x & 1 \\ 0 &
@@ -312,7 +321,7 @@ $$V_x=\begin{pmatrix}
 1,37819 \cdot 10^{-4} & -0,1335 \\
  -0,133503 & 129,328
 \end{pmatrix}$$
-Bei benutzung der für diese Messung relevanten Werte verschwinden alle Elemente
+Bei Benutzung der für diese Messung relevanten Werte verschwinden alle Elemente
 aus $V_y$ mit Ausnahme des Elements 1,1 und die gesuchte Unsicherheit ergibt
 sich nach Einsetzen der Umkehrfunktion von $E(x)$ zu $$\Delta E(E)=\sqrt{4,9174 \cdot 10^{-6} x^2 - 0,0540x + 147,984}$$
 
@@ -381,7 +390,7 @@ angefittet, wobei wir folgende Parameter erhalten haben:
 \end{center}
 \color{black}
 
-Die Fitparamter für die Gerade der form $f(x)=a \cdot x + b$ lauten:
+Die Fitparamter für die Gerade der Form $f(x)=a \cdot x + b$ lauten:
 \color{blue}
 \begin{center}
   \begin{tabular}{r|ll}
@@ -677,6 +686,8 @@ gemessener Energieverlust deutlich über dem erwarteten lag.
   \bibitem{anleitung} Versuchsanleitung zum Versuch Alpha-Spektroskopie, heruntergeladen am 28.06.2015 von der Homepage der TU Darmstadt
   \bibitem{website}
   \url{http://137.193.65.93/ger/theory.htm}, heruntergeladen am 05.08.2015.
+  \bibitem{website1}
+  \url{http://www.tf.uni-kiel.de/matwis/amat/mw2_ge/kap_6/illustr/p_n_3.gif}, heruntergeladen am 06.08.2015.
   \bibitem{Fehler} Statistics: A Guide to the Use of Statistical Methods in the
     Physical Sciences von Roger J. Barlow, Seite 60
   \bibitem{Halbleiter} Halbleiterdetektoren - Seminarvortrag von Stefanie Wanka \url{http://wwwa1.kph.uni-mainz.de/Vorlesungen/WS08/FP-Seminar/handouts/KP06_Wanka.pdf}
